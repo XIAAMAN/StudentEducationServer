@@ -1,0 +1,17 @@
+server:
+  port: 8848
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/student_education?autoReconnect=true&autoReconnectForPools=true&useSSL=true&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: X5331069
+
+jpa:
+  database: mysql
+  show-sql: true
+  hibernate:
+    ddl-auto: update
+    naming:
+      physical-strategy: org.hibernate.boot.domain.naming.PhysicalNamingStrategyStandardImpl
