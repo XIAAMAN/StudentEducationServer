@@ -12,11 +12,13 @@ public class SysUserServiceImpl implements SysUserService {
     @Resource
     private SysUserDao userDao;
 
+    // 通过用户名和密码验证用户身份
     @Override
     public SysUser getByNameAndPassword(String userName, String password) {
         return userDao.getByNameAndPassword(userName, password);
     }
 
+    // 增加单个用户
     @Override
     public void saveUser(SysUser user) {
         userDao.save(user);
