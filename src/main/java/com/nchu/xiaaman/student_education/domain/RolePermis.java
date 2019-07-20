@@ -59,7 +59,7 @@ public class RolePermis {
     public boolean equals(Object o) {
         if (o instanceof RolePermis) {
             RolePermis rolePermis = (RolePermis) o;
-            return this.rolePermisId.equals(rolePermis.rolePermisId);
+            return this.permisId.equals(rolePermis.permisId);
         }
         return super.equals(o);
     }

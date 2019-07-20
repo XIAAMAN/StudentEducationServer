@@ -52,7 +52,7 @@ public class LoginController {
                 // 因为用户有多个角色，可能有相同的权限，所以可能会导致相同的权限重复
                 // 必须要重写RolePermis中的equals()方法，不然返回的一定是false，因为默认比较的对象地址
                 for (int j=0; j<tempRolePermisList.size(); j++) {
-                    if (! rolePermisList.contains(tempRolePermisList.get(j))) {
+                    if (!rolePermisList.contains(tempRolePermisList.get(j))) {
                         rolePermisList.add(tempRolePermisList.get(j));
                     }
                 }

@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.nchu.xiaaman.student_education.domain.SysPermis;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PermisMenu {
@@ -40,6 +41,7 @@ public class PermisMenu {
                     parentPermis.setPermisId(permisList.get(i).getPermisId());
                     parentPermis.setPermisParentId(permisList.get(i).getPermisParentId());
                     parentPermis.setPermisName(permisList.get(i).getPermisName());
+                    parentPermis.setPermisPosition(permisList.get(i).getPermisPosition());
                     parentPermis.setPermisNameValue(permisList.get(i).getPermisNameValue());
                     parentPermis.setPermisDescription(permisList.get(i).getPermisDescription());
                     parentPermis.setPermisType(permisList.get(i).getPermisType());
@@ -59,6 +61,13 @@ public class PermisMenu {
             }
 
 //            permisMenu.permisValue = getPermisValue(permisList);
+            //按照position进行升序排序
+            // 先把根菜单进行排序
+            Collections.sort(parentPermisList);
+            for (int m=0; m<parentPermisList.size(); m++) {
+                // 对子菜单进行排序
+                Collections.sort(parentPermisList.get(m).getChildrenPermisList());
+            }
             permisMenu.parentPermisList = parentPermisList;
         }
 
@@ -72,12 +81,13 @@ public class PermisMenu {
 
 }
 
-class ParentPermis {
+class ParentPermis implements Comparable <ParentPermis>{
     private String permisId;
     private String permisParentId;
     private String permisName;
     private String permisNameValue;
     private String permisDescription;
+    private int permisPosition;
     private int permisType;
     private String permisUrl;
     private String permisIcon;
@@ -151,6 +161,14 @@ class ParentPermis {
         return childrenPermisList;
     }
 
+    public int getPermisPosition() {
+        return permisPosition;
+    }
+
+    public void setPermisPosition(int permisPosition) {
+        this.permisPosition = permisPosition;
+    }
+
     public void setChildrenPermisList(List<SysPermis> childrenPermisList) {
         this.childrenPermisList = childrenPermisList;
     }
@@ -158,5 +176,10 @@ class ParentPermis {
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
+    }
+
+    @Override
+    public int compareTo(ParentPermis o) {
+        return this.permisPosition - o.getPermisPosition();
     }
 }
