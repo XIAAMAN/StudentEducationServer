@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/student_education?autoReconnect=true&autoReconnectForPools=true&useSSL=true&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/student_education?serverTimezone=UTC&autoReconnect=true&autoReconnectForPools=true&useSSL=true&useUnicode=true&characterEncoding=utf8
     username: root
     password: X5331069
 

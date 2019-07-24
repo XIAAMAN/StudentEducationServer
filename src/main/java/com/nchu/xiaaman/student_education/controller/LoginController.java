@@ -1,5 +1,6 @@
 package com.nchu.xiaaman.student_education.controller;
 
+import com.nchu.xiaaman.student_education.config.MyLog;
 import com.nchu.xiaaman.student_education.domain.RolePermis;
 import com.nchu.xiaaman.student_education.domain.SysPermis;
 import com.nchu.xiaaman.student_education.domain.SysUser;
@@ -13,6 +14,7 @@ import com.nchu.xiaaman.student_education.utils.PermisMenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,17 +33,22 @@ public class LoginController {
     private SysPermisService sysPermisService;
 
     private Md5Utils md5Utils;
+    @MyLog(value = "用户登录")  //这里添加了AOP的自定义注解
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestBody SysUser user) {
+    public String login(@RequestBody SysUser user,HttpSession session) {
         List<UserRole> userRoleList;        //接收用户角色表的数据
         List<RolePermis> rolePermisList = new ArrayList<>();        // 接收角色权限表的数据
         List<SysPermis> permisList = new ArrayList<>();         // 用户权限
         PermisMenu permisMenu;      //最终封装后的数据
         // 对密码进行加密与数据库进行比对
         user.setUserPassword(md5Utils.md5(user.getUserPassword()));
+
         SysUser newUser = userService.getByNameAndPassword(user.getUserName(), user.getUserPassword());
         if(newUser != null) {
             //获取UserRole对象数组（一个用户可能拥有多个角色）
+            session.setAttribute("user", newUser);
+            session.setMaxInactiveInterval(48*3600);
+            SysUser temp = (SysUser) session.getAttribute("user");
             userRoleList = userRoleService.getUserRoleListByUserId(newUser.getUserId());
 
             for(int i=0; i<userRoleList.size(); i++) {
