@@ -8,26 +8,22 @@ import java.util.Collections;
 import java.util.List;
 
 public class PermisMenu {
+    private String permisValueList;
     private int state;
     private List<ParentPermis> parentPermisList;
 //    private List<String> permisValue;
 
     // 获得所有权限的值
-    public List<String> getPermisValue(List<SysPermis> permisList) {
-        List<String> permis = new ArrayList<>();
-        for (int i=0; i<permisList.size(); i++) {
-            permis.add(permisList.get(i).getPermisNameValue());
-        }
-        return permis;
-    }
+
 
     // 将权限进行封装返回
-    public PermisMenu decorateData(List<SysPermis> permisList, int state) {
+    public PermisMenu decorateData(List<SysPermis> permisList, int state, String permisValueList) {
         PermisMenu permisMenu = new PermisMenu();
         ParentPermis parentPermis;
         List<ParentPermis> parentPermisList = new ArrayList<>();
         List<SysPermis> childrenPermisList;
         permisMenu.state = state;
+        permisMenu.permisValueList = permisValueList;
         if (state == 400) {
             permisMenu.parentPermisList = null;
 //            permisMenu.permisValue = null;

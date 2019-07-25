@@ -59,14 +59,21 @@ public class SysLogAspect {
         String methodName = method.getName();
         sysLog.setLogMethod(className + "." + methodName);
 
+
         //请求的参数
         Object[] args = joinPoint.getArgs();
         //将参数所在的数组转换成json
         String params = JSON.toJSONString(args);
-        if(params.length() > 190) {
-            params = params.substring(0, 190) + "...]";
+        if(params.length() > 990) {
+            params = params.substring(0, 990) + "...]";
         }
-        sysLog.setLogParams(params);
+        if(sysLog.getLogName()!=null && sysLog.getLogName().equals("用户登录")) {
+            //对用户登录数据参数进行保护
+            sysLog.setLogParams("[******]");
+        } else {
+            sysLog.setLogParams(params);
+        }
+
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         sysLog.setLogCreateTime(dateFormat.format(new Date()));
@@ -82,14 +89,6 @@ public class SysLogAspect {
         if(user != null) {
             sysLog.setUserName(user.getUserName());
         }
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String currentUserName = authentication.getName();
-//
-//        //获取用户名
-//        sysLog.setUsername(currentUserName);
-        //获取用户ip地址
-
-
         //调用service保存SysLog实体类到数据库
         sysLogService.save(sysLog);
     }

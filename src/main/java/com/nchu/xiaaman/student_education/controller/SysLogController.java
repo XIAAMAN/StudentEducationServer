@@ -2,7 +2,6 @@ package com.nchu.xiaaman.student_education.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.nchu.xiaaman.student_education.config.MyLog;
-import com.nchu.xiaaman.student_education.domain.SysLog;
 import com.nchu.xiaaman.student_education.service.SysLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +19,7 @@ public class SysLogController {
     @RequestMapping(value = "/get")
     public String getLogList(@RequestParam(value = "page",defaultValue = "1") int page,
                              @RequestParam(value = "size",defaultValue = "10") int size) {
-        Pageable pageable=new PageRequest(page-1,size);
+        Pageable pageable=PageRequest.of(page-1, size);
         return JSONObject.toJSONString(logService.getAll(pageable));
 
     }

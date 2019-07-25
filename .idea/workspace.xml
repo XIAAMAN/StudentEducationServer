@@ -2,21 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="29188fd6-dbd5-4172-ad89-5b8a5df3506e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/config/LoginInterceptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/config/MyLog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/config/SysLogAspect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/config/WebAppConfigurer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysLogController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysLogDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysLog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysLogService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysLogServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/ExerciseLabelController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysExerciseController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/ExerciseLabelDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysExerciseDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/ExerciseLabel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysExercise.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/ExerciseLabelService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysExerciseService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/ExerciseLabelServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysExerciseServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/utils/ExerciseUnion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/config/SysLogAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/config/SysLogAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/HelloController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student_education.iml" beforeDir="false" afterPath="$PROJECT_DIR$/student_education.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysLogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysLogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysPermisDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysPermisDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysPermisService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysPermisService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysPermisServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysPermisServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/utils/PermisMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/utils/PermisMenu.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -30,7 +35,30 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/ExerciseLabelController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="5" column="62" lean-forward="true" selection-start-line="5" selection-start-column="62" selection-end-line="5" selection-end-column="62" />
+              <folding>
+                <element signature="e#618#619#0" expanded="true" />
+                <element signature="e#695#696#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysExerciseController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="17" column="14" lean-forward="true" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -46,14 +74,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/constant/HelloController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/controller/HelloController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/HelloController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysUserDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/StudentEducationApplication.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/model/SysUserModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/security/SecurityConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysUser.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysUserService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/utils/Md5Utils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/HelloController.java" />
@@ -64,21 +89,14 @@
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/UserRoleDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/UserRoleService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/UserRoleServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysPermisService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/RolePermisDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/RolePermisService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/RolePermisServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysPermis.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/utils/PermisMenu.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysPermisDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysPermisServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/nchu/xiaaman/student_education/StudentEducationApplicationTests.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/RolePermis.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/configInterface/MyLog.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/config/SysLogAspect.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysLog.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysLogController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysLogService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysLogDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysLogServiceImpl.java" />
@@ -87,7 +105,26 @@
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SessionController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/config/WebAppConfigurer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/config/LoginInterceptor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysPermisDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysPermisService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysPermisServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/utils/PermisMenu.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/LoginController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/ExerciseLabel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/ExerciseLabelDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/ExerciseLabelService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/ExerciseLabelServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysExerciseService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysExerciseServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/ExerciseLabelController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysExerciseDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysLogController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/config/SysLogAspect.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysExercise.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysUser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysLog.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/utils/ExerciseUnion.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysExerciseController.java" />
       </list>
     </option>
   </component>
@@ -112,8 +149,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -146,15 +181,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="student_education" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="student_education" type="b2602c69:ProjectViewProjectNode" />
-              <item name="student_education" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="student_education" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="student_education" type="b2602c69:ProjectViewProjectNode" />
@@ -199,40 +225,24 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="student_education" type="462c0819:PsiDirectoryNode" />
-              <item name="serviceImpl" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="student_education" type="b2602c69:ProjectViewProjectNode" />
               <item name="student_education" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="student_education" type="b2602c69:ProjectViewProjectNode" />
-              <item name="student_education" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="student_education" type="b2602c69:ProjectViewProjectNode" />
-              <item name="student_education" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="student_education" type="b2602c69:ProjectViewProjectNode" />
-              <item name="student_education" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="student_education" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="PermisMenu.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -325,7 +335,8 @@
       <workItem from="1563755674679" duration="1997000" />
       <workItem from="1563837651733" duration="6073000" />
       <workItem from="1563894666756" duration="2225000" />
-      <workItem from="1563926580008" duration="2996000" />
+      <workItem from="1563926580008" duration="11351000" />
+      <workItem from="1564013027089" duration="21719000" />
     </task>
     <task id="LOCAL-00001" summary="初步完成导航栏自动加载">
       <created>1563543496559</created>
@@ -341,7 +352,14 @@
       <option name="project" value="LOCAL" />
       <updated>1563628215154</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="完成系统日志模块，对登录、导航等样式做了修改">
+      <created>1563948398054</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1563948398054</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -365,12 +383,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98310000" />
+    <option name="totallyTimeSpent" value="128384000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="23" width="1550" height="848" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20604026" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2080537" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -380,13 +399,13 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32900432" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26262626" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.27272728" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.44588745" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.25829726" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32756132" />
@@ -451,40 +470,14 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="初步完成导航栏自动加载" />
     <MESSAGE value="完成导航栏根据用户权限自动加载" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成导航栏根据用户权限自动加载" />
+    <MESSAGE value="完成系统日志模块，对登录、导航等样式做了修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成系统日志模块，对登录、导航等样式做了修改" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/constant/HelloController.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/2.1.6.RELEASE/spring-boot-autoconfigure-2.1.6.RELEASE.jar!/org/springframework/boot/autoconfigure/orm/jpa/JpaBaseConfiguration.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="100" column="50" selection-start-line="100" selection-start-column="50" selection-end-line="100" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/9.0.21/tomcat-embed-core-9.0.21.jar!/org/apache/catalina/core/ApplicationFilterChain.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-142">
-          <caret line="71" selection-start-line="71" selection-end-line="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/security/SecurityConfig.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/utils/Md5Utils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-581">
           <caret line="10" column="48" lean-forward="true" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/HelloController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -527,16 +520,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/UserRoleService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -575,13 +558,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysPermisService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="4" column="35" lean-forward="true" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysRoleDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -612,38 +588,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/RolePermisServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#534#535#0" expanded="true" />
-            <element signature="e#600#601#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.1.8.RELEASE/spring-web-5.1.8.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="580">
           <caret line="101" selection-start-line="101" selection-end-line="101" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/utils/PermisMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="5" column="27" lean-forward="true" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
-          <folding>
-            <element signature="method#getPermisValue#0;class#PermisMenu#0" />
-            <element signature="e#4879#4880#0" expanded="true" />
-            <element signature="e#4916#4917#0" expanded="true" />
-            <element signature="e#4973#4974#0" expanded="true" />
-            <element signature="e#5025#5026#0" expanded="true" />
-            <element signature="e#5482#5483#0" expanded="true" />
-            <element signature="e#5506#5507#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -668,26 +616,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysPermisServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="9" column="8" lean-forward="true" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysUserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="6" column="49" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysUserServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -696,16 +624,6 @@
             <element signature="imports" expanded="true" />
             <element signature="e#689#690#0" expanded="true" />
             <element signature="e#723#724#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/config/SysLogAspect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="78" column="61" lean-forward="true" selection-start-line="78" selection-start-column="61" selection-end-line="78" selection-end-column="61" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -736,61 +654,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysPermis.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2340">
-          <caret line="120" selection-start-line="116" selection-start-column="3" selection-end-line="120" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysLog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="106" lean-forward="true" selection-start-line="102" selection-start-column="5" selection-end-line="106" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons/2.1.9.RELEASE/spring-data-commons-2.1.9.RELEASE.jar!/org/springframework/data/repository/PagingAndSortingRepository.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="15" column="35" lean-forward="true" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysPermisDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="7" column="27" lean-forward="true" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysLogService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="6" column="32" lean-forward="true" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysLogDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="10" column="39" lean-forward="true" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#0#51#1" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -834,26 +701,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysLogController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="16" column="14" lean-forward="true" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SessionController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="7" column="44" lean-forward="true" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SessionController.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/config/LoginInterceptor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
@@ -864,10 +712,272 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysPermis.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="121" lean-forward="true" selection-start-line="121" selection-end-line="121" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysPermisService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="6" column="53" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysPermisDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="11" column="17" lean-forward="true" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/ExerciseLabelService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="6" column="37" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/RolePermisServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/ExerciseLabelServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#344#345#0" expanded="true" />
+            <element signature="e#371#372#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysExerciseService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="6" column="35" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/HelloController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/student_education0725.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysPermisServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="22" column="61" selection-start-line="22" selection-start-column="61" selection-end-line="22" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#705#706#0" expanded="true" />
+            <element signature="e#775#776#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysExerciseServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/config/SysLogAspect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="72" column="16" lean-forward="true" selection-start-line="72" selection-start-column="16" selection-end-line="72" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysLogController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="18" column="35" lean-forward="true" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysLogService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="8" column="20" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons/2.1.9.RELEASE/spring-data-commons-2.1.9.RELEASE.jar!/org/springframework/data/domain/Page.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/utils/PermisMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="175" lean-forward="true" selection-start-line="171" selection-start-column="3" selection-end-line="175" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysExerciseDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="10" column="93" selection-start-line="10" selection-start-column="75" selection-end-line="10" selection-end-column="93" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/ExerciseLabel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="7" column="6" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysUserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" column="49" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/ExerciseLabelDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysLogDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="10" column="39" lean-forward="true" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysExercise.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4561#4562#0" expanded="true" />
+            <element signature="e#4609#4610#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysLog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/LoginController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="49" column="52" lean-forward="true" selection-start-line="49" selection-start-column="52" selection-end-line="49" selection-end-column="52" />
+        <state relative-caret-position="120">
+          <caret line="36" column="44" lean-forward="true" selection-start-line="36" selection-start-column="44" selection-end-line="36" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/utils/ExerciseUnion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="11" column="31" lean-forward="true" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1089#1090#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/ExerciseLabelController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="5" column="62" lean-forward="true" selection-start-line="5" selection-start-column="62" selection-end-line="5" selection-end-column="62" />
+          <folding>
+            <element signature="e#618#619#0" expanded="true" />
+            <element signature="e#695#696#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysExerciseController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="17" column="14" lean-forward="true" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
         </state>
       </provider>
     </entry>

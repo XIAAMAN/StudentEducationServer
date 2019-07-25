@@ -17,4 +17,9 @@ public class SysPermisServiceImpl implements SysPermisService {
     public SysPermis getSysPermisByPermisId(String permisId) {
         return sysPermisDao.getSysPermisByPermisId(permisId);
     }
+
+    @Override
+    public String getPermisValueByPermisId(String permisId) {
+        return sysPermisDao.getPermisValueByPermisId(permisId);
+    }
 }

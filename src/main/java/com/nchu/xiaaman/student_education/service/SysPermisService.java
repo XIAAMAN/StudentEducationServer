@@ -4,4 +4,5 @@ import com.nchu.xiaaman.student_education.domain.SysPermis;
 
 public interface SysPermisService {
     SysPermis getSysPermisByPermisId(String permisId);
+    String getPermisValueByPermisId(String permisId);
 }

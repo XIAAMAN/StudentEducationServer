@@ -1,5 +1,6 @@
 package com.nchu.xiaaman.student_education.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.nchu.xiaaman.student_education.config.MyLog;
 import com.nchu.xiaaman.student_education.domain.RolePermis;
 import com.nchu.xiaaman.student_education.domain.SysPermis;
@@ -39,7 +40,10 @@ public class LoginController {
         List<UserRole> userRoleList;        //接收用户角色表的数据
         List<RolePermis> rolePermisList = new ArrayList<>();        // 接收角色权限表的数据
         List<SysPermis> permisList = new ArrayList<>();         // 用户权限
+        List<String> permisValueList = new ArrayList<>();
         PermisMenu permisMenu;      //最终封装后的数据
+        String permisValue;
+        SysPermis tempPermis;
         // 对密码进行加密与数据库进行比对
         user.setUserPassword(md5Utils.md5(user.getUserPassword()));
 
@@ -66,28 +70,24 @@ public class LoginController {
             }
             // 根据权限id，查询权限对象
             for (int i=0; i<rolePermisList.size(); i++) {
-                permisList.add(sysPermisService.getSysPermisByPermisId(rolePermisList.get(i).getPermisId()));
+                //不能直接添加，可能为空
+                tempPermis = sysPermisService.getSysPermisByPermisId(rolePermisList.get(i).getPermisId());
+                if(tempPermis != null) {
+                    permisList.add(tempPermis);
+                }
+
+                //把用户拥有的所有权限值存入list
+                permisValueList.add(sysPermisService.getPermisValueByPermisId(rolePermisList.get(i).getPermisId()));
             }
-            permisMenu = new PermisMenu().decorateData(permisList, 200);
+
+            permisValue = JSONObject.toJSONString(permisValueList);
+            permisMenu = new PermisMenu().decorateData(permisList, 200, permisValue);
 
             return permisMenu.toString();
         } else {
-            permisMenu = new PermisMenu().decorateData(permisList, 400);
+            permisValue = JSONObject.toJSONString(permisValueList);
+            permisMenu = new PermisMenu().decorateData(permisList, 400, permisValue);
             return permisMenu.toString();
-        }
-    }
-
-
-    //接受前台发来的两个参数，对用户身份进行判定，如果身份正确，返回200，错误返回400
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public int login(@RequestParam("userName") String userName, @RequestParam("password") String password) {
-        //对密码进行md5加密，然后与数据库进行比对
-        password = md5Utils.md5(password);
-        SysUser user = userService.getByNameAndPassword(userName, password);
-        if(user != null) {
-            return 200;
-        } else {
-            return 400;
         }
     }
 }
