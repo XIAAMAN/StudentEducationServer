@@ -37,6 +37,9 @@ public class SysUser {
     @Column(name = "user_recommend_name")
     private String userRecommendName;       //用户推荐人账号名称，针对于助教用户，需要存取创建这个身份的老师账号名称
 
+    @Column(name = "user_status")       //用户状态，默认为1,0表示该用户不可见用户状态，默认为1,0表示该用户不可见
+    private int userStatus;
+
     public String getUserId() {
         return userId;
     }
@@ -107,5 +110,13 @@ public class SysUser {
 
     public void setUserRecommendName(String userRecommendName) {
         this.userRecommendName = userRecommendName;
+    }
+
+    public int getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(int userStatus) {
+        this.userStatus = userStatus;
     }
 }

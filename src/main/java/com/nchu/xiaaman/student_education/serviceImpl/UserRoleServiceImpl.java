@@ -18,4 +18,9 @@ public class UserRoleServiceImpl implements UserRoleService {
     public List<UserRole> getUserRoleListByUserId(String userId) {
         return userRoleDao.getUserRoleListByUserId(userId);
     }
+
+    @Override
+    public int getMaxRoleRank(String userId) {
+        return userRoleDao.getMaxRoleRank(userId);
+    }
 }

@@ -36,6 +36,9 @@ public class SysExercise {
     @Column(name = "exercise_output_example")
     private String exerciseOutputExample;       //输出样例
 
+    @Column(name = "exercise_error_example")
+    private String exerciseErrorExample;       //输出样例
+
     @Column(name = "exercise_warning")
     private String exerciseWarning;     //提示（警告）信息
 
@@ -72,6 +75,17 @@ public class SysExercise {
 
     @Column(name = "exercise_language")
     private String exerciseLanguage;
+
+    @Column(name = "exercise_free")
+    private int exerciseFree;       //是否开放给学生，1表示是，0表示否，默认为1
+
+    public int getExerciseFree() {
+        return exerciseFree;
+    }
+
+    public void setExerciseFree(int exerciseFree) {
+        this.exerciseFree = exerciseFree;
+    }
 
     public String getExerciseLanguage() {
         return exerciseLanguage;
@@ -231,6 +245,14 @@ public class SysExercise {
 
     public void setExerciseStatus(int exerciseStatus) {
         this.exerciseStatus = exerciseStatus;
+    }
+
+    public String getExerciseErrorExample() {
+        return exerciseErrorExample;
+    }
+
+    public void setExerciseErrorExample(String exerciseErrorExample) {
+        this.exerciseErrorExample = exerciseErrorExample;
     }
 
     @Override

@@ -7,6 +7,10 @@ spring:
     url: jdbc:mysql://localhost:3306/student_education?serverTimezone=UTC&autoReconnect=true&autoReconnectForPools=true&useSSL=true&useUnicode=true&characterEncoding=utf8
     username: root
     password: X5331069
+  servlet:
+    multipart:
+      max-file-size: 10485760
+      max-request-size: 20971520
 
 jpa:
   database: mysql

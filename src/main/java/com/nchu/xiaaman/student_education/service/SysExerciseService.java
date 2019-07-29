@@ -6,4 +6,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface SysExerciseService {
     Page<SysExercise> getAll(Pageable pageable);
+    void deleteExerciseById(String exerciseId);
+
+    //增加或修改题目
+    void saveOrModifyExercise(SysExercise sysExercise);
 }

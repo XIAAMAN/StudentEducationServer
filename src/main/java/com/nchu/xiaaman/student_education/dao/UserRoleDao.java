@@ -10,4 +10,8 @@ public interface UserRoleDao extends JpaRepository <UserRole, String> {
     // 根据用户id 查询所有的角色对象
     @Query(value = "select * from user_role where user_id = ?1", nativeQuery = true)
     List<UserRole> getUserRoleListByUserId(String userId);
+
+    //查询用户最大角色等级值
+    @Query(value = "select max(role_rank) from sys_role where role_id in (select role_id from user_role where user_id = ?1)", nativeQuery = true)
+    int getMaxRoleRank(String userId);
 }

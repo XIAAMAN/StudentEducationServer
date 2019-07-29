@@ -33,7 +33,7 @@ public class LoginController {
     @Autowired
     private SysPermisService sysPermisService;
 
-    private Md5Utils md5Utils;
+    public Md5Utils md5Utils;
     @MyLog(value = "用户登录")  //这里添加了AOP的自定义注解
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestBody SysUser user,HttpSession session) {

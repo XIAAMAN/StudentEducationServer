@@ -16,4 +16,16 @@ public class SysExerciseServiceImpl implements SysExerciseService {
     public Page<SysExercise> getAll(Pageable pageable) {
         return sysExerciseDao.getAll(pageable);
     }
+
+    //删除题目，更改题目的可见性
+    @Override
+    public void deleteExerciseById(String exerciseId) {
+        sysExerciseDao.deleteExerciseById(exerciseId);
+    }
+
+    //增加或修改题目
+    @Override
+    public void saveOrModifyExercise(SysExercise sysExercise) {
+        sysExerciseDao.save(sysExercise);
+    }
 }

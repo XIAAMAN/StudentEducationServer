@@ -3,6 +3,8 @@ package com.nchu.xiaaman.student_education.serviceImpl;
 import com.nchu.xiaaman.student_education.dao.SysUserDao;
 import com.nchu.xiaaman.student_education.domain.SysUser;
 import com.nchu.xiaaman.student_education.service.SysUserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,5 +25,21 @@ public class SysUserServiceImpl implements SysUserService {
     public void saveUser(SysUser user) {
         userDao.save(user);
     }
+
+    @Override
+    public Page<SysUser> getUserListByRank(int roleRank, Pageable pageable) {
+        return userDao.getUserListByRank(roleRank, pageable);
+    }
+
+    @Override
+    public String getUserIdByUserName(String userName) {
+        return userDao.getUserIdByUserName(userName);
+    }
+
+    @Override
+    public SysUser getUserById(String userId) {
+        return userDao.getOne(userId);
+    }
+
 
 }
