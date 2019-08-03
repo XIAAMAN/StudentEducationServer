@@ -65,7 +65,7 @@ public class SysExercise {
     private String exerciseLabel;           //题目标签，多个标签用空格隔开
 
     @Column(name = "exercise_difficult_value")
-    private float exerciseDifficultValue;      //难度系数，值为1-5，默认为3.0
+    private String exerciseDifficultValue;      //题目难度，分为简单、适中、难三种
 
     @Column(name = "exercise_type")
     private int exerciseType;               //1表示编程题，2表示选择题，3表示判断题、4表示填空题，默认为1
@@ -223,11 +223,11 @@ public class SysExercise {
         this.exerciseLabel = exerciseLabel;
     }
 
-    public float getExerciseDifficultValue() {
+    public String getExerciseDifficultValue() {
         return exerciseDifficultValue;
     }
 
-    public void setExerciseDifficultValue(float exerciseDifficultValue) {
+    public void setExerciseDifficultValue(String exerciseDifficultValue) {
         this.exerciseDifficultValue = exerciseDifficultValue;
     }
 

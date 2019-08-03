@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class SysUserServiceImpl implements SysUserService {
@@ -39,6 +40,31 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public SysUser getUserById(String userId) {
         return userDao.getOne(userId);
+    }
+
+    @Override
+    public List<String> getUserNames() {
+        return userDao.getUserNames();
+    }
+
+    @Override
+    public List<String> getUserNumbers() {
+        return userDao.getUserNumbers();
+    }
+
+    @Override
+    public Page<SysUser> getUserListByUserNameAndUserNumber(String userName, String userNumber, int roleRank, Pageable pageable) {
+        return userDao.getUserListByUserNameAndUserNumber(userName, userNumber, roleRank, pageable);
+    }
+
+    @Override
+    public SysUser getUserByUserName(String userName) {
+        return userDao.getUserByUserName(userName);
+    }
+
+    @Override
+    public SysUser getUserByUserNumber(String userNumber) {
+        return userDao.getUserByUserNumber(userNumber);
     }
 
 

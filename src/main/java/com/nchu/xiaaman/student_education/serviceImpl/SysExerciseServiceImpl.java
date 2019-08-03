@@ -28,4 +28,14 @@ public class SysExerciseServiceImpl implements SysExerciseService {
     public void saveOrModifyExercise(SysExercise sysExercise) {
         sysExerciseDao.save(sysExercise);
     }
+
+    @Override
+    public SysExercise getSysExerciseByName(String exerciseName) {
+        return sysExerciseDao.getSysExerciseByName(exerciseName);
+    }
+
+    @Override
+    public Page<SysExercise> getSysExerciseByNameAndLabel(String exerciseName, String exerciseLabel, Pageable pageable) {
+        return sysExerciseDao.getSysExerciseByNameAndLabel(exerciseName, exerciseLabel, pageable);
+    }
 }

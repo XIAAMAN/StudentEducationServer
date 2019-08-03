@@ -10,4 +10,7 @@ public interface SysExerciseService {
 
     //增加或修改题目
     void saveOrModifyExercise(SysExercise sysExercise);
+    SysExercise getSysExerciseByName(String exerciseName);
+    Page<SysExercise> getSysExerciseByNameAndLabel(String exerciseName, String exerciseLabel, Pageable pageable);
+
 }

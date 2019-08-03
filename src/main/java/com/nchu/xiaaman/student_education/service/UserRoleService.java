@@ -7,4 +7,6 @@ import java.util.List;
 public interface UserRoleService {
     List<UserRole> getUserRoleListByUserId(String userId);
     int getMaxRoleRank(String userId);
+    List<String> getRoles(int roleRank);
+    void saveUserRole(UserRole userRole);
 }

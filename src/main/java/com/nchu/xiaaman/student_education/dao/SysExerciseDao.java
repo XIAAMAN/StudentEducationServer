@@ -19,4 +19,11 @@ public interface SysExerciseDao extends JpaRepository<SysExercise, String> {
     @Modifying
     @Query(value = "update sys_exercise set exercise_status = 0 where exercise_id =?1", nativeQuery = true)
     void deleteExerciseById(String exerciseId);
+
+    @Query(value = "select * from sys_exercise where exercise_name =?1", nativeQuery = true)
+    SysExercise getSysExerciseByName(String exerciseName);
+
+    //通过题目名称和题目标签进行模糊查询
+    @Query(value = "select * from sys_exercise where exercise_name like ?1 and exercise_label like ?2", nativeQuery = true)
+    Page<SysExercise> getSysExerciseByNameAndLabel(String exerciseName, String exerciseLabel, Pageable pageable);
 }
