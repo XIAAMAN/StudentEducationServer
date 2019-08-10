@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class SysExerciseServiceImpl implements SysExerciseService {
@@ -25,7 +26,7 @@ public class SysExerciseServiceImpl implements SysExerciseService {
 
     //增加或修改题目
     @Override
-    public void saveOrModifyExercise(SysExercise sysExercise) {
+    public void saveExercise(SysExercise sysExercise) {
         sysExerciseDao.save(sysExercise);
     }
 
@@ -37,5 +38,40 @@ public class SysExerciseServiceImpl implements SysExerciseService {
     @Override
     public Page<SysExercise> getSysExerciseByNameAndLabel(String exerciseName, String exerciseLabel, Pageable pageable) {
         return sysExerciseDao.getSysExerciseByNameAndLabel(exerciseName, exerciseLabel, pageable);
+    }
+
+    @Override
+    public Page<SysExercise> getCheckExercise(Pageable pageable) {
+        return sysExerciseDao.getCheckExercise(pageable);
+    }
+
+    @Override
+    public void modifyByIdAndCheckName(String checkName, String exerciseId) {
+        sysExerciseDao.modifyByIdAndCheckName(checkName, exerciseId);
+    }
+
+    @Override
+    public void modifyState(String checkName, String exerciseId) {
+        sysExerciseDao.modifyState(checkName, exerciseId);
+    }
+
+    @Override
+    public SysExercise getById(String exerciseId) {
+        return sysExerciseDao.getOne(exerciseId);
+    }
+
+    @Override
+    public Page<SysExercise> getExerciseFree(Pageable pageable) {
+        return sysExerciseDao.getExerciseFree(pageable);
+    }
+
+    @Override
+    public List<String> getExerciseNameList() {
+        return sysExerciseDao.getExerciseNameList();
+    }
+
+    @Override
+    public String getExerciseIdByName(String exerciseName) {
+        return sysExerciseDao.getExerciseIdByName(exerciseName);
     }
 }

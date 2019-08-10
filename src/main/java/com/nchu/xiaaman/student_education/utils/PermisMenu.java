@@ -10,6 +10,7 @@ import java.util.List;
 public class PermisMenu {
     private String permisValueList;
     private int state;
+    private int rankValue;
     private List<ParentPermis> parentPermisList;
 //    private List<String> permisValue;
 
@@ -17,12 +18,13 @@ public class PermisMenu {
 
 
     // 将权限进行封装返回
-    public PermisMenu decorateData(List<SysPermis> permisList, int state, String permisValueList) {
+    public PermisMenu decorateData(List<SysPermis> permisList, int state, String permisValueList, int rankValue) {
         PermisMenu permisMenu = new PermisMenu();
         ParentPermis parentPermis;
         List<ParentPermis> parentPermisList = new ArrayList<>();
         List<SysPermis> childrenPermisList;
         permisMenu.state = state;
+        permisMenu.rankValue = rankValue;
         permisMenu.permisValueList = permisValueList;
         if (state == 400) {
             permisMenu.parentPermisList = null;
@@ -74,7 +76,6 @@ public class PermisMenu {
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
     }
-
 }
 
 class ParentPermis implements Comparable <ParentPermis>{

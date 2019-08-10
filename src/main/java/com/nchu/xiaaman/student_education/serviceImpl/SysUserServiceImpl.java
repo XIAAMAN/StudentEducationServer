@@ -67,5 +67,15 @@ public class SysUserServiceImpl implements SysUserService {
         return userDao.getUserByUserNumber(userNumber);
     }
 
+    @Override
+    public Page<SysUser> getUserListByRank(String userRecommendName, int roleRank, Pageable pageable) {
+        return userDao.getUserListByRank(userRecommendName, roleRank, pageable);
+    }
+
+    @Override
+    public Page<SysUser> getUserListByUserNameAndUserNumber(String userName, String userNumber, String userRecommendName, int roleRank, Pageable pageable) {
+        return userDao.getUserListByUserNameAndUserNumber(userName, userNumber, userRecommendName, roleRank, pageable);
+    }
+
 
 }

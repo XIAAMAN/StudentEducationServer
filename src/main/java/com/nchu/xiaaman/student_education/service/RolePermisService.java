@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface RolePermisService {
     List<RolePermis> getRolePermisByRoleId(String roleId);
+    String[] getPermisIdListByRoleId(String roleId);
+    void deleteByRoleId(String roleId);
+    void saveRolePermis(RolePermis rolePermis);
+    RolePermis getByRoleAndPermis(String roleId, String permisId);
 }

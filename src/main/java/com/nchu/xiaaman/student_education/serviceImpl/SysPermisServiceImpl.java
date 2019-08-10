@@ -6,6 +6,7 @@ import com.nchu.xiaaman.student_education.service.SysPermisService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class SysPermisServiceImpl implements SysPermisService {
@@ -19,7 +20,27 @@ public class SysPermisServiceImpl implements SysPermisService {
     }
 
     @Override
+    public SysPermis getById(String permisId) {
+        return sysPermisDao.getOne(permisId);
+    }
+
+    @Override
     public String getPermisValueByPermisId(String permisId) {
         return sysPermisDao.getPermisValueByPermisId(permisId);
+    }
+
+    @Override
+    public SysPermis getAllRankSysPermisByPermisId(String permisId) {
+        return sysPermisDao.getAllRankSysPermisByPermisId(permisId);
+    }
+
+    @Override
+    public List<SysPermis> getPermisListByParentId(String parentId) {
+        return sysPermisDao.getPermisListByParentId(parentId);
+    }
+
+    @Override
+    public String getIdByNameValue(String nameValue) {
+        return sysPermisDao.getIdByNameValue(nameValue);
     }
 }

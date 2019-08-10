@@ -19,4 +19,6 @@ public interface SysUserService {
     @Query(value = "select * from sys_user where user_name = ?1", nativeQuery = true)
     SysUser getUserByUserName(String userName);
     SysUser getUserByUserNumber(String userNumber);
+    Page<SysUser> getUserListByRank(String userRecommendName, int roleRank, Pageable pageable);
+    Page<SysUser> getUserListByUserNameAndUserNumber(String userName, String userNumber,String userRecommendName, int roleRank, Pageable pageable);
 }

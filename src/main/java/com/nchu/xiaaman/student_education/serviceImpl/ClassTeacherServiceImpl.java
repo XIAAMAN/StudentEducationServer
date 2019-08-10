@@ -15,4 +15,9 @@ public class ClassTeacherServiceImpl implements ClassTeacherService {
     public void saveClassTeacher(ClassTeacher classTeacher) {
         classTeacherDao.save(classTeacher);
     }
+
+    @Override
+    public String getUserIdByClassId(String classId) {
+        return classTeacherDao.getUserIdByClassId(classId);
+    }
 }

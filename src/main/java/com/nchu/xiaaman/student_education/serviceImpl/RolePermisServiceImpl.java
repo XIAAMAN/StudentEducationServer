@@ -16,4 +16,24 @@ public class RolePermisServiceImpl implements RolePermisService {
     public List<RolePermis> getRolePermisByRoleId(String roleId) {
         return rolePermisDao.getRolePermisByRoleId(roleId);
     }
+
+    @Override
+    public String[] getPermisIdListByRoleId(String roleId) {
+        return rolePermisDao.getPermisIdListByRoleId(roleId);
+    }
+
+    @Override
+    public void deleteByRoleId(String roleId) {
+        rolePermisDao.deleteByRoleId(roleId);
+    }
+
+    @Override
+    public void saveRolePermis(RolePermis rolePermis) {
+        rolePermisDao.save(rolePermis);
+    }
+
+    @Override
+    public RolePermis getByRoleAndPermis(String roleId, String permisId) {
+        return rolePermisDao.getByRoleAndPermis(roleId, permisId);
+    }
 }

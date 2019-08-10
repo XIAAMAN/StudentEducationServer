@@ -1,5 +1,6 @@
 package com.nchu.xiaaman.student_education.controller;
 
+import com.nchu.xiaaman.student_education.config.MyLog;
 import com.nchu.xiaaman.student_education.domain.ClassTeacher;
 import com.nchu.xiaaman.student_education.domain.SysClass;
 import com.nchu.xiaaman.student_education.domain.SysUser;
@@ -115,20 +116,23 @@ public class FileUploadController {
                             if(cellStr.length() != 8) {
                                 return 300;         //学号格式错误
                             }
-                            user = sysUserService.getUserByUserName(cellStr);
+                            user = sysUserService.getUserByUserNumber(cellStr);
                             if(user != null) {
-                                return 400;     //学号已被使用
+                                return 400;     //学号被占用
+                            }
+                            if(sysUserService.getUserByUserName(cellStr) != null) {
+                                return 500;     //用户名已被注册
                             }
                         } else if(y==2) {
                             if(j==0) {
                                 classNumber =cellStr;
                                 sysClass = sysClassService.getSysClassByNumber(cellStr);
                                 if(sysClass != null) {
-                                    return 500;     //班级已存在
+                                    return 600;     //班级已存在
                                 }
                             } else {
                                 if(!classNumber.equals(cellStr)){
-                                    return 600;         //班级号不一致
+                                    return 700;         //班级号不一致
                                 }
                             }
                        }

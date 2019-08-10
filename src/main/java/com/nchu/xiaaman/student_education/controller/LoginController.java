@@ -51,8 +51,9 @@ public class LoginController {
         if(newUser != null) {
             //获取UserRole对象数组（一个用户可能拥有多个角色）
             session.setAttribute("user", newUser);
+            int rankValue = userRoleService.getMaxRoleRank(newUser.getUserId());
+            session.setAttribute("rankValue", rankValue);
             session.setMaxInactiveInterval(48*3600);
-            SysUser temp = (SysUser) session.getAttribute("user");
             userRoleList = userRoleService.getUserRoleListByUserId(newUser.getUserId());
 
             for(int i=0; i<userRoleList.size(); i++) {
@@ -81,12 +82,12 @@ public class LoginController {
             }
 
             permisValue = JSONObject.toJSONString(permisValueList);
-            permisMenu = new PermisMenu().decorateData(permisList, 200, permisValue);
+            permisMenu = new PermisMenu().decorateData(permisList, 200, permisValue, rankValue);
 
             return permisMenu.toString();
         } else {
             permisValue = JSONObject.toJSONString(permisValueList);
-            permisMenu = new PermisMenu().decorateData(permisList, 400, permisValue);
+            permisMenu = new PermisMenu().decorateData(permisList, 400, permisValue,0);
             return permisMenu.toString();
         }
     }

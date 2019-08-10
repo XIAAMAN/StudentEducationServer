@@ -37,19 +37,25 @@ public class SysUserController {
     @MyLog(value = "查询用户")  //这里添加了AOP的自定义注解
     @RequestMapping(value = "/get")
     public String getUsers(@RequestParam(value = "page",defaultValue = "1") int page,
-                         @RequestParam(value = "size",defaultValue = "10") int size){
-        //先查询用户的角色等级值
-        //获取RequestAttributes
-        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-        //从获取RequestAttributes中获取HttpServletRequest的信息
-        HttpServletRequest request = (HttpServletRequest) requestAttributes.resolveReference(RequestAttributes.REFERENCE_REQUEST);
-        HttpSession session = request.getSession();
+                         @RequestParam(value = "size",defaultValue = "10") int size, HttpSession session){
+//        //先查询用户的角色等级值
+//        //获取RequestAttributes
+//        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+//        //从获取RequestAttributes中获取HttpServletRequest的信息
+//        HttpServletRequest request = (HttpServletRequest) requestAttributes.resolveReference(RequestAttributes.REFERENCE_REQUEST);
+//        HttpSession session = request.getSession();
         SysUser user = (SysUser) session.getAttribute("user");
         //获得用户最大角色等级值
-        int maxRoleRank = userRoleService.getMaxRoleRank(user.getUserId());
+        int maxRoleRank = (int) session.getAttribute("rankValue");
         Pageable pageable= PageRequest.of(page-1, size);
+        //对用户角色进行判断，如果为管理员或超级管理员则查询角色等级比自己小的用户即可
+        //如果用户角色等级小于管理员，则查询自己创建的用户(主要是针对教师这个角色，查询自己的所带班级的学生)
+        if(maxRoleRank < 9) {
+            return JSONObject.toJSONString(sysUserService.getUserListByRank(user.getUserName(),maxRoleRank, pageable));
+        }else {
+            return JSONObject.toJSONString(sysUserService.getUserListByRank(maxRoleRank, pageable));
+        }
 
-        return JSONObject.toJSONString(sysUserService.getUserListByRank(maxRoleRank, pageable));
     }
 
 
@@ -58,18 +64,17 @@ public class SysUserController {
     public String getUsersByUserNameAndUserNumber(@RequestParam(value = "page",defaultValue = "1") int page,
                            @RequestParam(value = "size",defaultValue = "10") int size,
                            @RequestParam(value = "userName") String userName,
-                           @RequestParam(value = "userNumber") String userNumber){
-        //先查询用户的角色等级值
-        //获取RequestAttributes
-        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-        //从获取RequestAttributes中获取HttpServletRequest的信息
-        HttpServletRequest request = (HttpServletRequest) requestAttributes.resolveReference(RequestAttributes.REFERENCE_REQUEST);
-        HttpSession session = request.getSession();
+                           @RequestParam(value = "userNumber") String userNumber, HttpSession session){
         SysUser user = (SysUser) session.getAttribute("user");
         //获得用户最大角色等级值
-        int maxRoleRank = userRoleService.getMaxRoleRank(user.getUserId());
+        int maxRoleRank = (int) session.getAttribute("rankValue");
         Pageable pageable= PageRequest.of(page-1, size);
+        //对用户角色进行判断，如果为管理员或超级管理员则查询角色等级比自己小的用户即可
+        //如果用户角色等级小于管理员，则查询自己创建的用户(主要是针对教师这个角色，查询自己的所带班级的学生)
+        if(maxRoleRank < 9) {
+            return JSONObject.toJSONString(sysUserService.getUserListByUserNameAndUserNumber(userName, userNumber, user.getUserName(), maxRoleRank, pageable));
 
+        }
         return JSONObject.toJSONString(sysUserService.getUserListByUserNameAndUserNumber(userName, userNumber, maxRoleRank, pageable));
     }
     @MyLog(value = "重置用户密码")  //这里添加了AOP的自定义注解

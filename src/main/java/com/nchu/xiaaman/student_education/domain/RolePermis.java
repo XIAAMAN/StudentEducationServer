@@ -20,7 +20,7 @@ public class RolePermis {
     private String permisId;
 
     @Column(name = "role_permis_state")
-    private String rolePermisState;
+    private int rolePermisState;
 
     public String getRolePermisId() {
         return rolePermisId;
@@ -46,11 +46,11 @@ public class RolePermis {
         this.permisId = permisId;
     }
 
-    public String getRolePermisState() {
+    public int getRolePermisState() {
         return rolePermisState;
     }
 
-    public void setRolePermisState(String rolePermisState) {
+    public void setRolePermisState(int rolePermisState) {
         this.rolePermisState = rolePermisState;
     }
 

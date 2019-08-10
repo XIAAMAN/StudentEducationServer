@@ -6,6 +6,7 @@ import com.nchu.xiaaman.student_education.service.SysClassService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class SysClassServiceImpl implements SysClassService {
@@ -19,5 +20,15 @@ public class SysClassServiceImpl implements SysClassService {
     @Override
     public void saveClass(SysClass sysClass) {
         sysClassDao.save(sysClass);
+    }
+
+    @Override
+    public List<String> getClassNameList() {
+        return sysClassDao.getClassNameList();
+    }
+
+    @Override
+    public String getClassIdByNumber(String classNumber) {
+        return sysClassDao.getClassIdByNumber(classNumber);
     }
 }
