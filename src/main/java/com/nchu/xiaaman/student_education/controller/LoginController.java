@@ -50,6 +50,12 @@ public class LoginController {
         SysUser newUser = userService.getByNameAndPassword(user.getUserName(), user.getUserPassword());
         if(newUser != null) {
             //获取UserRole对象数组（一个用户可能拥有多个角色）
+            SysUser testUser = (SysUser) session.getAttribute("user");
+            if(testUser != null) {
+                permisValue = JSONObject.toJSONString(permisValueList);
+                permisMenu = new PermisMenu().decorateData(permisList, 600, permisValue,0);
+                return permisMenu.toString();
+            }
             session.setAttribute("user", newUser);
             int rankValue = userRoleService.getMaxRoleRank(newUser.getUserId());
             session.setAttribute("rankValue", rankValue);

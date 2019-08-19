@@ -38,12 +38,7 @@ public class SysUserController {
     @RequestMapping(value = "/get")
     public String getUsers(@RequestParam(value = "page",defaultValue = "1") int page,
                          @RequestParam(value = "size",defaultValue = "10") int size, HttpSession session){
-//        //先查询用户的角色等级值
-//        //获取RequestAttributes
-//        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-//        //从获取RequestAttributes中获取HttpServletRequest的信息
-//        HttpServletRequest request = (HttpServletRequest) requestAttributes.resolveReference(RequestAttributes.REFERENCE_REQUEST);
-//        HttpSession session = request.getSession();
+
         SysUser user = (SysUser) session.getAttribute("user");
         //获得用户最大角色等级值
         int maxRoleRank = (int) session.getAttribute("rankValue");
@@ -118,12 +113,7 @@ public class SysUserController {
     }
 
     @RequestMapping(value = "/logOut")
-    public int logOut(){
-        //获取RequestAttributes
-        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-        //从获取RequestAttributes中获取HttpServletRequest的信息
-        HttpServletRequest request = (HttpServletRequest) requestAttributes.resolveReference(RequestAttributes.REFERENCE_REQUEST);
-        HttpSession session = request.getSession();
+    public int logOut(HttpSession session){
         session.invalidate();
         return 200;
     }
@@ -150,4 +140,35 @@ public class SysUserController {
         }
     }
 
+    //获得用户信息
+    @RequestMapping(value = "/getUserInfo")
+    public String getUserInfo(@RequestParam("userName") String userName){
+        SysUser user = sysUserService.getUserByUserName(userName);
+        return JSONObject.toJSONString(user);
+    }
+
+    //修改用户个人资料
+    @RequestMapping(value = "/modifyUserInfo")
+    public int modifyUserInfo(@RequestBody SysUser user){
+        sysUserService.saveUser(user);
+        return 200;
+    }
+
+    //修改密码
+    @RequestMapping(value = "/modifyPwd")
+    public int modifyPwd(@RequestParam("oldPassword") String oldPassword,
+                         @RequestParam("newPassword") String newPassword){
+        //获取RequestAttributes
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        //从获取RequestAttributes中获取HttpServletRequest的信息
+        HttpServletRequest request = (HttpServletRequest) requestAttributes.resolveReference(RequestAttributes.REFERENCE_REQUEST);
+        HttpSession session = request.getSession();
+        SysUser user = (SysUser) session.getAttribute("user");
+        if(!md5Utils.md5(oldPassword).equals(user.getUserPassword())) {  //原密码不正确
+            return 400;
+        }
+        user.setUserPassword(md5Utils.md5(newPassword));  //修改密码
+        sysUserService.saveUser(user);
+        return 200;
+    }
 }

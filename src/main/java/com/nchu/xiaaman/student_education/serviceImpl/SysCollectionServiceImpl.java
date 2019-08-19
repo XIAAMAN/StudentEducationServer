@@ -43,4 +43,9 @@ public class SysCollectionServiceImpl implements SysCollectionService {
     public String getNameById(String collectionId) {
         return sysCollectionDao.getNameById(collectionId);
     }
+
+    @Override
+    public Page<SysCollection> getCollectionByCourseId(String courseId, Pageable pageable) {
+        return sysCollectionDao.getCollectionByCourseId(courseId, pageable);
+    }
 }

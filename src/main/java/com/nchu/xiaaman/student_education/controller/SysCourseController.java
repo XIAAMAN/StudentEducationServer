@@ -43,7 +43,8 @@ public class SysCourseController {
     @MyLog(value = "查询课程")  //这里添加了AOP的自定义注解
     @RequestMapping(value = "/get")
     public String getLogList(@RequestParam(value = "page",defaultValue = "1") int page,
-                             @RequestParam(value = "size",defaultValue = "10") int size, HttpSession session) {
+                             @RequestParam(value = "size",defaultValue = "10") int size,  HttpSession session) {
+
         Pageable pageable= PageRequest.of(page-1, size);
         SysUser user = (SysUser) session.getAttribute("user");
         int rankValue = (int) session.getAttribute("rankValue");

@@ -6,6 +6,7 @@ import com.nchu.xiaaman.student_education.domain.SysUser;
 import com.nchu.xiaaman.student_education.service.SysExerciseService;
 import com.nchu.xiaaman.student_education.service.UserRoleService;
 import com.nchu.xiaaman.student_education.utils.ExerciseUnion;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,9 +22,6 @@ import java.util.Date;
 public class SysExerciseController {
     @Autowired
     private SysExerciseService sysExerciseService;
-    @Autowired
-    private UserRoleService userRoleService;
-
 
     @MyLog(value = "查询题库")  //这里添加了AOP的自定义注解
     @RequestMapping(value = "/get")
@@ -126,7 +124,11 @@ public class SysExerciseController {
     @MyLog(value = "题目练习详情")
     @RequestMapping(value = "/practiceDetails")
     public String practiceExerciseDetails(@RequestParam("exerciseId") String exerciseId){
-        return sysExerciseService.getById(exerciseId).toString();
+        SysExercise exercise = sysExerciseService.getById(exerciseId);
+        SysExercise exerciseCopy = new SysExercise();
+        BeanUtils.copyProperties(exercise, exerciseCopy);
+        exerciseCopy.setExerciseCode("");
+        return exerciseCopy.toString();
     }
 
     @MyLog(value = "题目练习")

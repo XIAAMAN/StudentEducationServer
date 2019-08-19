@@ -14,6 +14,9 @@ public interface SysCollectionDao extends JpaRepository<SysCollection, String> {
     @Query(value = "select * from sys_collection", nativeQuery = true)
     Page<SysCollection> getCollection(Pageable pageable);
 
+    @Query(value = "select * from sys_collection where collection_id in (select collection_id from course_collection where course_id = ?1)", nativeQuery = true)
+    Page<SysCollection> getCollectionByCourseId(String courseId, Pageable pageable);
+
     //通过id删除题目集
     @Transactional
     @Modifying

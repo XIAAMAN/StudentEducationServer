@@ -1,19 +1,16 @@
 package com.nchu.xiaaman.student_education;
 
 import com.nchu.xiaaman.student_education.domain.RolePermis;
-import com.nchu.xiaaman.student_education.utils.Md5Utils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class StudentEducationApplicationTests {
-
     @Test
     public void contextLoads() {
         RolePermis s1 = new RolePermis();
@@ -25,8 +22,6 @@ public class StudentEducationApplicationTests {
         List<RolePermis> list = new ArrayList<>();
         list.add(s1);
         list.add(s2);
-
         System.out.println(list.contains(s3));
     }
-
 }

@@ -22,4 +22,5 @@ public interface CollectionExerciseDao extends JpaRepository<CollectionExercise,
     //通过题目集id查询该题目集下所有的题目id
     @Query(value = "select exercise_id from collection_exercise where collection_id = ?1", nativeQuery = true)
     List<String> getExerciseIdListByCollectionId(String collectionId);
+
 }
