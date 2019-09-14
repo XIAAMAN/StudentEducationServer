@@ -20,4 +20,9 @@ public class ClassTeacherServiceImpl implements ClassTeacherService {
     public String getUserIdByClassId(String classId) {
         return classTeacherDao.getUserIdByClassId(classId);
     }
+
+    @Override
+    public String[] getClassIdListByTeacherId(String userId) {
+        return classTeacherDao.getClassIdListByTeacherId(userId);
+    }
 }

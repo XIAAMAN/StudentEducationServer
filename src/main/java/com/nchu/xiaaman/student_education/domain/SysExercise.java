@@ -48,7 +48,6 @@ public class SysExercise {
     @Column(name = "exercise_score")
     private float exerciseScore;        //题目分值,默认为5.0
 
-
     @Column(name = "exercise_file_name")
     private String exerciseFileName;
 
@@ -78,6 +77,18 @@ public class SysExercise {
 
     @Column(name = "exercise_free")
     private int exerciseFree;       //是否开放给学生，1表示是，0表示否，默认为1
+
+    @Column(name = "exercise_select_one")
+    private String exerciseSelectOne;
+
+    @Column(name = "exercise_select_two")
+    private String exerciseSelectTwo;
+
+    @Column(name = "exercise_select_three")
+    private String exerciseSelectThree;
+
+    @Column(name = "exercise_select_four")
+    private String exerciseSelectFour;
 
     public int getExerciseFree() {
         return exerciseFree;
@@ -253,6 +264,38 @@ public class SysExercise {
 
     public void setExerciseErrorExample(String exerciseErrorExample) {
         this.exerciseErrorExample = exerciseErrorExample;
+    }
+
+    public String getExerciseSelectOne() {
+        return exerciseSelectOne;
+    }
+
+    public void setExerciseSelectOne(String exerciseSelectOne) {
+        this.exerciseSelectOne = exerciseSelectOne;
+    }
+
+    public String getExerciseSelectTwo() {
+        return exerciseSelectTwo;
+    }
+
+    public void setExerciseSelectTwo(String exerciseSelectTwo) {
+        this.exerciseSelectTwo = exerciseSelectTwo;
+    }
+
+    public String getExerciseSelectThree() {
+        return exerciseSelectThree;
+    }
+
+    public void setExerciseSelectThree(String exerciseSelectThree) {
+        this.exerciseSelectThree = exerciseSelectThree;
+    }
+
+    public String getExerciseSelectFour() {
+        return exerciseSelectFour;
+    }
+
+    public void setExerciseSelectFour(String exerciseSelectFour) {
+        this.exerciseSelectFour = exerciseSelectFour;
     }
 
     @Override

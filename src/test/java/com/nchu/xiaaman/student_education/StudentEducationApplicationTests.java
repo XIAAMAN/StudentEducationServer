@@ -5,23 +5,34 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.lang.management.ManagementFactory;
+import java.lang.management.OperatingSystemMXBean;
+import java.lang.reflect.Method;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class StudentEducationApplicationTests {
     @Test
     public void contextLoads() {
-        RolePermis s1 = new RolePermis();
-        s1.setRolePermisId("123456");
-        RolePermis s2 = new RolePermis();
-        s2.setRolePermisId("12345625874");
-        RolePermis s3 = new RolePermis();
-        s3.setRolePermisId("123456");
-        List<RolePermis> list = new ArrayList<>();
-        list.add(s1);
-        list.add(s2);
-        System.out.println(list.contains(s3));
+        OperatingSystemMXBean operatingSystemMXBean = ManagementFactory.getOperatingSystemMXBean();
+
+            double load;
+            try {
+                Method method = OperatingSystemMXBean.class.getMethod("getSystemLoadAverage");
+                load = (Double)method.invoke(operatingSystemMXBean);
+            } catch (Throwable e) {
+                load = -1;
+            }
+            int cpu = operatingSystemMXBean.getAvailableProcessors();
+        System.out.println("cpu : " + cpu);
+        System.out.println("load : " + load);
+            if (load >= cpu) {
+                System.err.println("WARN!!load:" + load + ","+ "cpu:" + cpu);
+            }
+
     }
+
+
+
 }

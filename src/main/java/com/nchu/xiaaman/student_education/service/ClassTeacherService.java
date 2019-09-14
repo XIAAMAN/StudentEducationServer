@@ -5,4 +5,5 @@ import com.nchu.xiaaman.student_education.domain.ClassTeacher;
 public interface ClassTeacherService {
     void saveClassTeacher(ClassTeacher classTeacher);
     String getUserIdByClassId(String classId);
+    String[] getClassIdListByTeacherId(String userId);
 }

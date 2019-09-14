@@ -9,4 +9,5 @@ public interface CollectionExerciseService {
     void saveCollectionExercise(CollectionExercise collectionExercise);
     CollectionExercise getByCollectionIdAndExerciseId(String collectionId, String exerciseId);
     List<String> getExerciseIdListByCollectionId(String collectionId);
+    void deleteByCollectionIdAndExerciseId(String collectionId, String exerciseId);
 }

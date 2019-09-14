@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class SysCourseServiceImpl implements SysCourseService {
@@ -29,8 +30,8 @@ public class SysCourseServiceImpl implements SysCourseService {
     }
 
     @Override
-    public Page<SysCourse> getCourse(String ClassNumber, Pageable pageable) {
-        return sysCourseDao.getCourse(ClassNumber, pageable);
+    public Page<SysCourse> getCourse(String classNumber, Pageable pageable) {
+        return sysCourseDao.getCourse(classNumber, pageable);
     }
 
     @Override
@@ -41,5 +42,15 @@ public class SysCourseServiceImpl implements SysCourseService {
     @Override
     public String getCourseIdByName(String courseName) {
         return sysCourseDao.getCourseIdByName(courseName);
+    }
+
+    @Override
+    public List<SysCourse> getCourseId(String classNumber) {
+        return sysCourseDao.getCourseId(classNumber);
+    }
+
+    @Override
+    public SysCourse getBycourseNameandClass(String courseName, String courseClass) {
+        return sysCourseDao.getBycourseNameandClass(courseName, courseClass);
     }
 }

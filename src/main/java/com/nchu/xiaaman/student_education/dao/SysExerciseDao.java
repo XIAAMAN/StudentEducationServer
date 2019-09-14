@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface SysExerciseDao extends JpaRepository<SysExercise, String> {
     //查询题库
-    @Query(value = "select * from sys_exercise where exercise_status = 1", nativeQuery = true)
+    @Query(value = "select * from sys_exercise where exercise_status = 1 and exercise_state = 1", nativeQuery = true)
     Page<SysExercise> getAll(Pageable pageable);
 
     //删除题目,设置为不可见
@@ -51,6 +51,10 @@ public interface SysExerciseDao extends JpaRepository<SysExercise, String> {
     //查询所有可用通过审核的题目
     @Query(value = "select exercise_name from sys_exercise where exercise_state = 1 and exercise_status = 1", nativeQuery = true)
     List<String> getExerciseNameList();
+
+    //查询所有可用通过审核的题目
+    @Query(value = "select exercise_name from sys_exercise where exercise_state = 1 and exercise_status = 1 and exercise_type = ?1", nativeQuery = true)
+    List<String> getExerciseNameList(int exerciseType);
 
     //根据题目名称查询题目id
     @Query(value = "select exercise_id from sys_exercise where exercise_name = ?1", nativeQuery = true)

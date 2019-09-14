@@ -19,4 +19,5 @@ public interface SysExerciseService {
     Page<SysExercise> getExerciseFree(Pageable pageable);
     List<String> getExerciseNameList();
     String getExerciseIdByName(String exerciseName);
+    List<String> getExerciseNameList(int exerciseType);
 }

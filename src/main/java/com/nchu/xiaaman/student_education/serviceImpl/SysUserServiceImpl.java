@@ -77,5 +77,10 @@ public class SysUserServiceImpl implements SysUserService {
         return userDao.getUserListByUserNameAndUserNumber(userName, userNumber, userRecommendName, roleRank, pageable);
     }
 
+    @Override
+    public List<SysUser> getUserListByClass(String userClass) {
+        return userDao.getUserListByClass(userClass);
+    }
+
 
 }

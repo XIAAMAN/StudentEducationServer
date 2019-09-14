@@ -31,4 +31,9 @@ public class SysClassServiceImpl implements SysClassService {
     public String getClassIdByNumber(String classNumber) {
         return sysClassDao.getClassIdByNumber(classNumber);
     }
+
+    @Override
+    public SysClass getById(String classId) {
+        return sysClassDao.getOne(classId);
+    }
 }

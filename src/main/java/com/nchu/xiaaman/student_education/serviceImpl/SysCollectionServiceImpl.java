@@ -48,4 +48,9 @@ public class SysCollectionServiceImpl implements SysCollectionService {
     public Page<SysCollection> getCollectionByCourseId(String courseId, Pageable pageable) {
         return sysCollectionDao.getCollectionByCourseId(courseId, pageable);
     }
+
+    @Override
+    public SysCollection getByIdAndTime(String collectionId, String nowTime) {
+        return sysCollectionDao.getByIdAndTime(collectionId, nowTime);
+    }
 }

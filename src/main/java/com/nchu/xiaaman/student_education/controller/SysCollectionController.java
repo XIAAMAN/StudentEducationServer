@@ -3,11 +3,14 @@ package com.nchu.xiaaman.student_education.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.nchu.xiaaman.student_education.config.MyLog;
 import com.nchu.xiaaman.student_education.domain.CollectionExercise;
+import com.nchu.xiaaman.student_education.domain.CourseCollection;
 import com.nchu.xiaaman.student_education.domain.SysCollection;
 import com.nchu.xiaaman.student_education.domain.SysExercise;
 import com.nchu.xiaaman.student_education.service.CollectionExerciseService;
+import com.nchu.xiaaman.student_education.service.CourseCollectionService;
 import com.nchu.xiaaman.student_education.service.SysCollectionService;
 import com.nchu.xiaaman.student_education.service.SysExerciseService;
+import com.nchu.xiaaman.student_education.utils.TempCollectionExercise;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +35,9 @@ public class SysCollectionController {
 
     @Autowired
     private SysExerciseService sysExerciseService;
+
+    @Autowired
+    private CourseCollectionService courseCollectionService;
 
     @MyLog(value = "查询题目集")  //这里添加了AOP的自定义注解
     @RequestMapping(value = "/get")
@@ -72,30 +79,53 @@ public class SysCollectionController {
 
     @MyLog(value = "题目集增加题目")  //这里添加了AOP的自定义注解
     @RequestMapping(value = "/addExercise")
-    public int addExercise(@RequestParam("collectionId") String collectionId, @RequestParam("exerciseList") String[] exerciseList) {
+    public int addExercise(@RequestBody TempCollectionExercise tempCollectionExercise) {
         CollectionExercise collectionExercise;
-        //先删除该题目集下的题目
-        collectionExerciseService.deleteByCollectionId(collectionId);
-        for(int i=0; i<exerciseList.length; i++) {
+        //查找该题目集下所有的题目
+        List<String> exerciseIdList = collectionExerciseService.getExerciseIdListByCollectionId(tempCollectionExercise.getCollectionId());
+        //根据题目id查找所有题目
+        List<SysExercise> sysExerciseList = new ArrayList<>();
+        for(int i=0; i<exerciseIdList.size(); i++) {
+            sysExerciseList.add(sysExerciseService.getById(exerciseIdList.get(i)));
+        }
+        //查找当前题目类型的题目id
+        List<String> exerciseIdTypeList = new ArrayList<>();
+        for(int i=0; i<sysExerciseList.size(); i++) {
+            if(sysExerciseList.get(i).getExerciseType() == tempCollectionExercise.getExerciseType()) {
+                exerciseIdTypeList.add(sysExerciseList.get(i).getExerciseId());
+            }
+        }
+        //删除题目集中该类型的题目
+        for(int i=0; i<exerciseIdTypeList.size(); i++) {
+            collectionExerciseService.deleteByCollectionIdAndExerciseId(tempCollectionExercise.getCollectionId(), exerciseIdTypeList.get(i));
+        }
+
+        for(int i=0; i<tempCollectionExercise.getExerciseListValue().length; i++) {
             //判断该题目是否已经添加到题目集中
-            String exerciseId = sysExerciseService.getExerciseIdByName(exerciseList[i]);
+            String exerciseId = sysExerciseService.getExerciseIdByName(tempCollectionExercise.getExerciseListValue()[i]);
             collectionExercise = new CollectionExercise();
-            collectionExercise.setCollectionId(collectionId);
+            collectionExercise.setCollectionId(tempCollectionExercise.getCollectionId());
             collectionExercise.setExerciseId(exerciseId);
             collectionExerciseService.saveCollectionExercise(collectionExercise);
-
         }
         return 200;
     }
 
     //查询题目集已有题目名称
-    @RequestMapping(value = "/getExerciseName")
-    public String getCollectionExerciseNameList(@RequestParam("collectionId") String collectionId) {
+    @RequestMapping(value = "/getProgramExerciseName")
+    public String getCollectionExerciseNameList(@RequestParam("collectionId") String collectionId,
+                                                @RequestParam("exerciseType") int exerciseType) {
         //根据题目集id查询该题目集下所有题目
         List<String> exerciseIdList = collectionExerciseService.getExerciseIdListByCollectionId(collectionId);
         List<String> exerciseNameList = new ArrayList<>();
+        SysExercise sysExercise;
         for(int i=0; i<exerciseIdList.size(); i++) {
-            exerciseNameList.add(sysExerciseService.getById(exerciseIdList.get(i)).getExerciseName());
+            sysExercise = sysExerciseService.getById(exerciseIdList.get(i));
+            //添加当前题目类型
+            if(sysExercise.getExerciseType() == exerciseType) {
+                exerciseNameList.add(sysExercise.getExerciseName());
+            }
+
         }
 
         return JSONObject.toJSONString(exerciseNameList);
@@ -123,6 +153,17 @@ public class SysCollectionController {
     @RequestMapping(value = "/getCollectionName")
     public String getCollectionNameList() {
         return JSONObject.toJSONString(sysCollectionService.getCollectionName());
+    }
+
+    //判断题目集是否已经使用，如果已经使用则不可以删除
+    @RequestMapping(value = "/judgeCollection")
+    public int judgeCollectionIsUsed(@RequestParam("collectionId") String collectionId) {
+        List<CourseCollection> courseCollections = courseCollectionService.getByCollectionId(collectionId);
+        if(courseCollections != null && courseCollections.size()>0) {
+            return 400;
+        } else {
+            return 200;     //表示该题目集未被添加到课程中，可以删除
+        }
     }
 
 }

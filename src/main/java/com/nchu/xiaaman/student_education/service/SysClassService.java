@@ -9,4 +9,5 @@ public interface SysClassService {
     void saveClass(SysClass sysClass);
     List<String> getClassNameList();
     String getClassIdByNumber(String classNumber);
+    SysClass getById(String classId);
 }

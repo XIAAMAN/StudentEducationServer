@@ -31,4 +31,9 @@ public class CourseCollectionServiceImpl implements CourseCollectionService {
     public void deleteCollectionListByCourseId(String courseId) {
         courseCollectionDao.deleteCollectionListByCourseId(courseId);
     }
+
+    @Override
+    public List<CourseCollection> getByCollectionId(String collection_id) {
+        return courseCollectionDao.getByCollectionId(collection_id);
+    }
 }

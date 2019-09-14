@@ -115,6 +115,7 @@ public class SysUserController {
     @RequestMapping(value = "/logOut")
     public int logOut(HttpSession session){
         session.invalidate();
+        System.out.println("注销用户");
         return 200;
     }
 

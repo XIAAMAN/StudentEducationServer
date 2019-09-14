@@ -47,4 +47,7 @@ public interface SysUserDao extends JpaRepository<SysUser, String> {
     @Query(value = "select * from sys_user where user_number = ?1", nativeQuery = true)
     SysUser getUserByUserNumber(String userNumber);
 
+    //通过班级查询一个班的用户
+    @Query(value = "select * from sys_user where user_class = ?1", nativeQuery = true)
+    List<SysUser> getUserListByClass(String userClass);
 }

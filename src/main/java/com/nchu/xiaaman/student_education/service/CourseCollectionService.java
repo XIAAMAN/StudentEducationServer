@@ -9,4 +9,5 @@ public interface CourseCollectionService {
     CourseCollection getCourseCollectionById(String id);
     void saveCourseCollection(CourseCollection courseCollection);
     void deleteCollectionListByCourseId(String courseId);
+    List<CourseCollection> getByCollectionId(String collection_id);
 }

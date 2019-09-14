@@ -34,4 +34,8 @@ public interface SysCollectionDao extends JpaRepository<SysCollection, String> {
     //根据id查询题目集名称
     @Query(value = "select collection_name from sys_collection where collection_id = ?1", nativeQuery = true)
     String getNameById(String collectionId);
+
+    //根据id查询已经结束的题目集
+    @Query(value = "select * from sys_collection where collection_id = ?1 and collection_end_time < ?2", nativeQuery = true)
+    SysCollection getByIdAndTime(String collectionId, String nowTime);
 }

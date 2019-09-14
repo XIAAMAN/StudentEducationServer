@@ -75,19 +75,17 @@ public class SysExerciseController {
         sysExercise.setExerciseState(0);
         sysExercise.setExerciseTime(time);
         //设置一些默认值
-        sysExercise.setExerciseFree(1);
         sysExercise.setExerciseLanguage("C");
         sysExercise.setExerciseStatus(1);
-        sysExercise.setExerciseType(1);
-        sysExercise.setExerciseScore(5);
+        sysExercise.setExerciseClassifyCause(1);
         sysExercise.setExerciseDifficultValue("适中");
         sysExerciseService.saveExercise(sysExercise);
         return 200;
     }
 
     @RequestMapping(value = "/judgeExerciseName")
-    public int judgeExerciseName(@RequestParam("exerciseName") String exerciseName) {
-        SysExercise exercise = sysExerciseService.getSysExerciseByName(exerciseName);
+    public int judgeExerciseName(@RequestBody SysExercise sysExercise) {
+        SysExercise exercise = sysExerciseService.getSysExerciseByName(sysExercise.getExerciseName());
         if(exercise==null) {
             return 200;
         } else {
@@ -143,8 +141,8 @@ public class SysExerciseController {
 
     //查询所有可用通过审核的题目名称
     @RequestMapping(value = "/getName")
-    public String getExerciseNameList() {
-        return JSONObject.toJSONString(sysExerciseService.getExerciseNameList());
+    public String getExerciseNameList(@RequestParam("exerciseType") int exerciseType) {
+        return JSONObject.toJSONString(sysExerciseService.getExerciseNameList(exerciseType));
     }
 
 }

@@ -15,6 +15,12 @@ public interface CollectionExerciseDao extends JpaRepository<CollectionExercise,
     @Query(value = "delete from collection_exercise where collection_id = ?1", nativeQuery = true)
     void deleteByCollectionId(String collectionId);
 
+    //通过题目集id和题目id删除
+    @Transactional
+    @Modifying
+    @Query(value = "delete from collection_exercise where collection_id = ?1 and exercise_id = ?2", nativeQuery = true)
+    void deleteByCollectionIdAndExerciseId(String collectionId, String exerciseId);
+
     //通过题目id和题目集id查询
     @Query(value = "select * from collection_exercise where collection_id = ?1 and exercise_id = ?2", nativeQuery = true)
     CollectionExercise getByCollectionIdAndExerciseId(String collectionId, String exerciseId);
@@ -22,5 +28,6 @@ public interface CollectionExerciseDao extends JpaRepository<CollectionExercise,
     //通过题目集id查询该题目集下所有的题目id
     @Query(value = "select exercise_id from collection_exercise where collection_id = ?1", nativeQuery = true)
     List<String> getExerciseIdListByCollectionId(String collectionId);
+
 
 }
