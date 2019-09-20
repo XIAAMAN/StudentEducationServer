@@ -15,22 +15,15 @@ import java.lang.reflect.Method;
 public class StudentEducationApplicationTests {
     @Test
     public void contextLoads() {
-        OperatingSystemMXBean operatingSystemMXBean = ManagementFactory.getOperatingSystemMXBean();
-
-            double load;
-            try {
-                Method method = OperatingSystemMXBean.class.getMethod("getSystemLoadAverage");
-                load = (Double)method.invoke(operatingSystemMXBean);
-            } catch (Throwable e) {
-                load = -1;
-            }
-            int cpu = operatingSystemMXBean.getAvailableProcessors();
-        System.out.println("cpu : " + cpu);
-        System.out.println("load : " + load);
-            if (load >= cpu) {
-                System.err.println("WARN!!load:" + load + ","+ "cpu:" + cpu);
-            }
-
+        String str = "xiaa ma[i = 3]n\"xi\"‘wfwe’efe‘’“分”分为";
+        System.out.println("替换前: "+str);
+        str = str.replace("\"", "\'");
+        str = str.replace("‘", "\'");
+        str = str.replace("’", "\'");
+        str = str.replace("“", "\'");
+        str = str.replace("”", "\'");
+        str = str.replace(" ", "");
+        System.out.println("替换后: "+str);
     }
 
 

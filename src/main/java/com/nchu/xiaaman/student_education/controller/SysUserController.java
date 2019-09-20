@@ -4,10 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.nchu.xiaaman.student_education.config.MyLog;
 import com.nchu.xiaaman.student_education.domain.SysUser;
 import com.nchu.xiaaman.student_education.domain.UserRole;
-import com.nchu.xiaaman.student_education.service.SysRoleService;
-import com.nchu.xiaaman.student_education.service.SysUserService;
-import com.nchu.xiaaman.student_education.service.UserRoleService;
+import com.nchu.xiaaman.student_education.service.*;
 import com.nchu.xiaaman.student_education.utils.Md5Utils;
+import com.zaxxer.hikari.util.SuspendResumeLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +19,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/sys_user")
@@ -32,6 +33,12 @@ public class SysUserController {
 
     @Autowired
     private SysRoleService sysRoleService;
+
+    @Autowired
+    private ClassTeacherService classTeacherService;
+
+    @Autowired
+    private SysClassService sysClassService;
 
     public Md5Utils md5Utils;
     @MyLog(value = "查询用户")  //这里添加了AOP的自定义注解
@@ -115,7 +122,6 @@ public class SysUserController {
     @RequestMapping(value = "/logOut")
     public int logOut(HttpSession session){
         session.invalidate();
-        System.out.println("注销用户");
         return 200;
     }
 
@@ -171,5 +177,35 @@ public class SysUserController {
         user.setUserPassword(md5Utils.md5(newPassword));  //修改密码
         sysUserService.saveUser(user);
         return 200;
+    }
+
+    @RequestMapping(value = "/getSameTeacherUser")
+    public String getSameTeacherUser(HttpSession session) {
+        SysUser user = (SysUser) session.getAttribute("user");
+        if(user.getUserClass() != null) {
+            //根据班级号，查询班级id
+            String classId = sysClassService.getClassIdByNumber(user.getUserClass());
+            //查询相同教师班级
+            String teacherId = classTeacherService.getUserIdByClassId(classId);
+            //根据教师id查询所授课班级
+            String[] classIdList = classTeacherService.getClassIdListByTeacherId(teacherId);
+            String classNumber;
+            List<SysUser> userList = new ArrayList<>();
+            for(int i=0; i<classIdList.length; i++) {
+                classNumber = sysClassService.getById(classIdList[i]).getClassNumber();
+                userList.addAll(sysUserService.getUserListByClass(classNumber));
+            }
+            //不返回自己的信息
+            for(int i=0; i<userList.size(); i++) {
+                if(user.getUserId().equals(userList.get(i).getUserId())) {
+                    userList.remove(i);
+                    i--;
+                }
+            }
+
+            return JSONObject.toJSONString(userList);
+        } else {
+            return "200";
+        }
     }
 }

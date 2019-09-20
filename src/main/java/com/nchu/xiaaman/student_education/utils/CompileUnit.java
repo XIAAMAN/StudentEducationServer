@@ -1,6 +1,7 @@
 package com.nchu.xiaaman.student_education.utils;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -143,8 +144,8 @@ public class CompileUnit {
 
 //            process.waitFor();
             // 获取命令执行结果, 有两个结果: 正常的输出 和 错误的输出（PS: 子进程的输出就是主进程的输入）
-            bufrIn = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
-            bufrError = new BufferedReader(new InputStreamReader(process.getErrorStream(), "UTF-8"));
+            bufrIn = new BufferedReader(new InputStreamReader(process.getInputStream(), Charset.defaultCharset()));
+            bufrError = new BufferedReader(new InputStreamReader(process.getErrorStream(), Charset.defaultCharset()));
             // 读取输出
             String line = null;
             while ((line = bufrIn.readLine()) != null) {

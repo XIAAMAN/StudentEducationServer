@@ -6,6 +6,7 @@ import com.nchu.xiaaman.student_education.domain.*;
 import com.nchu.xiaaman.student_education.service.ExerciseCompileService;
 import com.nchu.xiaaman.student_education.service.ExercisePracticeService;
 import com.nchu.xiaaman.student_education.service.ExerciseScoreService;
+import com.nchu.xiaaman.student_education.service.SysExerciseService;
 import com.nchu.xiaaman.student_education.utils.CompileUnit;
 import com.nchu.xiaaman.student_education.utils.UnionData;
 import net.lingala.zip4j.core.ZipFile;
@@ -23,6 +24,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,6 +43,9 @@ public class CompileController {
 
     @Autowired
     private ExerciseCompileService exerciseCompileService;
+
+    @Autowired
+    private SysExerciseService sysExerciseService;
 
     private String CODE_PATH = "";
     private List<InputOutputFile> inputFiles;
@@ -99,6 +104,14 @@ public class CompileController {
             object.put("result", "题目已提交10次，不能再提交");
             return object.toJSONString();
         }
+        if(unionData.getExercise().getExerciseType() != 1) {
+            float otherScore = dealSubmitOtherScore(user, unionData.getExercise(), unionData.getCollectionId());
+            otherScore = Float.parseFloat(String.format("%.1f", otherScore));     //保留一位小数
+            saveScoreInfo(user, unionData.getExercise(), unionData.getCollectionId(), otherScore);
+            object.put("state", "200");
+            object.put("result", "本题最终得分: "+otherScore +"分");
+            return object.toJSONString();
+        }
         String result = compileUnitSubmit.compile(unionData.getExercise().getExerciseCode());
         if(result.equals("")) {
             //编译成功
@@ -146,64 +159,89 @@ public class CompileController {
     @RequestMapping(value = "/practice")
     public String compilePractice(@RequestBody SysExercise exercise, HttpSession session) throws IOException {
         SysUser user = (SysUser) session.getAttribute("user");
-        CompileUnit compileUnitPractice = new CompileUnit();
-
-        CODE_PATH = base + user.getUserName() + "\\";
-        compileUnitPractice.setUserName(user.getUserName());
-        compileUnitPractice.setFileUrl(exercise.getExerciseFileUrl());
-        compileUnitPractice.setInputCode(exercise.getExerciseInputExample());
         JSONObject object = new JSONObject();
-        int rightNumber = 0;
-        int fileNumber = 0;
         if(getPracticeTimes(user, exercise) >= 10) {
             object.put("state", "600");
             object.put("result", "题目已提交10次，不能再提交");
             return object.toJSONString();
         }
-        String result = compileUnitPractice.compile(exercise.getExerciseCode());
-        if(result.equals("")) {
-            //编译成功
-            //文件处理
-            dealFiles(exercise);
-            fileNumber = inputFiles.size();
-            for(int i=0; i<inputFiles.size(); i++) {
-                String runOUtCome = run(inputFiles.get(i).getFile(), compileUnitPractice);
-                if(compileUnitPractice.getIsSuccess()) {
-                    for(int j=0; j<outputFiles.size(); j++) {
-                        if(inputFiles.get(i).getFileName().equals(outputFiles.get(j).getFileName())
-                                && runOUtCome.equals(IOUtils.toString(outputFiles.get(j).getFile(), String.valueOf(StandardCharsets.UTF_8)))) {
-                            rightNumber ++;
-                            outputFiles.get(j).getFile().close();
-                        }
-                    }
-                }else {
-                    //运行失败
-                    dealFailedExercisePractice(user, exercise);
-                    object.put("state", "400");
-                    object.put("result", runOUtCome);
-                    return object.toJSONString();
-                }
-            }
+        if(exercise.getExerciseType() !=1) {
+            return dealOtherExercise(exercise, user);
         } else {
-            //编译失败，保存编译信息
-            saveCompileInfo(user, exercise, result);
-            dealFailedExercisePractice(user, exercise);
-            object.put("state", "400");
-            object.put("result", result);
+            int rightNumber = 0;
+            int fileNumber = 0;
+            CompileUnit compileUnitPractice = new CompileUnit();
+            CODE_PATH = base + user.getUserName() + "\\";
+            compileUnitPractice.setUserName(user.getUserName());
+            compileUnitPractice.setFileUrl(exercise.getExerciseFileUrl());
+            compileUnitPractice.setInputCode(exercise.getExerciseInputExample());
+            String result = compileUnitPractice.compile(exercise.getExerciseCode());
+            if(result.equals("")) {
+                //编译成功
+                //文件处理
+                dealFiles(exercise);
+                fileNumber = inputFiles.size();
+                for(int i=0; i<inputFiles.size(); i++) {
+//                    String inputStirng = IOUtils.toString(inputFiles.get(i).getFile(), String.valueOf(StandardCharsets.UTF_8));
+//                    inputFiles.get(i).getFile().close();
+                    String runOUtCome = run(inputFiles.get(i).getFile(), compileUnitPractice);
+                    System.out.println("系统默认字符编码：" + Charset.defaultCharset());
+//                    runOUtCome = new String(runOUtCome.getBytes(), "UTF-8");
+                    if(runOUtCome.equals(new String(runOUtCome.getBytes(),"GBK"))) {
+                        System.out.println("GBK");
+                    } else if(runOUtCome.equals(new String(runOUtCome.getBytes(),"UTF-8"))) {
+                        System.out.println("UTF-8");
+                    } else if(runOUtCome.equals(new String(runOUtCome.getBytes(),"GB2312"))) {
+                        System.out.println("GB2312");
+                    }else if(runOUtCome.equals(new String(runOUtCome.getBytes(),"ISO-8859-1"))){
+                        System.out.println("ISO-8859-1");
+                    }else {
+                        System.out.println("不知道");
+                    }
+
+                    System.out.println("输出结果：" + runOUtCome);
+                    if(compileUnitPractice.getIsSuccess()) {
+                        for(int j=0; j<outputFiles.size(); j++) {
+
+                            if(inputFiles.get(i).getFileName().equals(outputFiles.get(j).getFileName())) {
+                                String tempTestOUt = IOUtils.toString(outputFiles.get(j).getFile(), String.valueOf(StandardCharsets.UTF_8));
+                                System.out.println("测试结果: " +tempTestOUt +"\n");
+                                if(runOUtCome.equals(tempTestOUt)) {
+                                    rightNumber ++;
+                                }
+                                outputFiles.get(j).getFile().close();
+                                break;
+                            }
+                        }
+                    }else {
+                        //运行失败
+                        dealFailedExercisePractice(user, exercise);
+                        object.put("state", "400");
+                        object.put("result", runOUtCome);
+                        return object.toJSONString();
+                    }
+                }
+            } else {
+                //编译失败，保存编译信息
+                saveCompileInfo(user, exercise, result);
+                dealFailedExercisePractice(user, exercise);
+                object.put("state", "400");
+                object.put("result", result);
+                return object.toJSONString();
+            }
+
+            if(rightNumber == fileNumber) {
+                dealSuccessExercisePractice(user, exercise);
+                object.put("state", "200");
+                object.put("result", "恭喜你，答题正确，再接再厉");
+            }else {
+                dealFailedExercisePractice(user, exercise);
+                object.put("state", "400");
+                object.put("result", "很遗憾，答题失败，继续加油，早日找出bug");
+            }
+            System.out.println("答对数量 ："+rightNumber);
             return object.toJSONString();
         }
-
-        if(rightNumber == fileNumber) {
-            dealSuccessExercisePractice(user, exercise);
-            object.put("state", "200");
-            object.put("result", "恭喜你，答题正确，再接再厉");
-        }else {
-            dealFailedExercisePractice(user, exercise);
-            object.put("state", "400");
-            object.put("result", "很遗憾，答题失败，继续加油，早日找出bug");
-        }
-
-        return object.toJSONString();
     }
 
     @RequestMapping(value = "/getExercisePractice")
@@ -270,7 +308,7 @@ public class CompileController {
         try {
             zFile = new ZipFile(file);
             // 此处最好立即设置字符集
-            zFile.setFileNameCharset("GBK");
+            zFile.setFileNameCharset("UTF-8");
 //            if (!zFile.isValidZipFile()) {
 //                return object.toJSONString();
 //            }
@@ -408,5 +446,107 @@ public class CompileController {
         }else {
             return exercisePractice.getExercisePracticeNumber();
         }
+    }
+
+    public String dealOtherExercise(SysExercise sysExercise, SysUser user) {
+        JSONObject object = new JSONObject();
+        SysExercise temp = sysExerciseService.getById(sysExercise.getExerciseId());
+        if(sysExercise.getExerciseType() == 4) {
+            String str = sysExercise.getExerciseCode();
+            //去噪
+            str = str.replace("\"", "\'");
+            str = str.replace("‘", "\'");
+            str = str.replace("’", "\'");
+            str = str.replace("“", "\'");
+            str = str.replace("”", "\'");
+            str = str.replace(" ", "");
+
+            String answerStr = temp.getExerciseCode();
+            answerStr = answerStr.replace("\"", "\'");
+            answerStr = answerStr.replace("‘", "\'");
+            answerStr = answerStr.replace("’", "\'");
+            answerStr = answerStr.replace("“", "\'");
+            answerStr = answerStr.replace("”", "\'");
+            answerStr = answerStr.replace(" ", "");
+            if(answerStr.equals(str)) {
+                dealSuccessExercisePractice(user, sysExercise);
+                object.put("state", "200");
+                object.put("result", "恭喜你，答题正确，再接再厉");
+            } else {
+                String result = "";
+                int number = 0;
+                String[] answer = answerStr.split(";xiaaman;");
+                String[] myAnswer = str.split(";xiaaman;");
+                for(int i=0; i<answer.length; i++) {
+                    number = i+1;
+                    if(answer[i].equals(myAnswer[i])) {
+                        result += "第"+ number +"问答对;   ";
+                    } else {
+                        result += "第"+ number +"问答错;   ";
+                    }
+                }
+                dealFailedExercisePractice(user, sysExercise);
+                object.put("state", "400");
+                object.put("result", result);
+            }
+        } else {
+            if(temp.getExerciseCode().equals(sysExercise.getExerciseCode())) {
+                dealSuccessExercisePractice(user, sysExercise);
+                object.put("state", "200");
+                object.put("result", "恭喜你，答题正确，再接再厉");
+            }else {
+                dealFailedExercisePractice(user, sysExercise);
+                object.put("state", "400");
+                object.put("result", "很遗憾，答题失败，继续加油");
+            }
+        }
+        return object.toJSONString();
+    }
+
+    //算分数
+    public float dealSubmitOtherScore(SysUser user, SysExercise exercise, String collectionId) {
+        //获得原题目
+        SysExercise answerExercise = sysExerciseService.getById(exercise.getExerciseId());
+        //选择题或判断题
+        if(exercise.getExerciseType()==2 || exercise.getExerciseType()==3) {
+            if(exercise.getExerciseCode().equals(answerExercise.getExerciseCode())) {
+                return exercise.getExerciseScore();
+            } else {
+                return 0;
+            }
+        } else {
+            String str = exercise.getExerciseCode();
+            //去噪
+            str = str.replace("\"", "\'");
+            str = str.replace("‘", "\'");
+            str = str.replace("’", "\'");
+            str = str.replace("“", "\'");
+            str = str.replace("”", "\'");
+            str = str.replace(" ", "");
+
+            String answerStr = answerExercise.getExerciseCode();
+            answerStr = answerStr.replace("\"", "\'");
+            answerStr = answerStr.replace("‘", "\'");
+            answerStr = answerStr.replace("’", "\'");
+            answerStr = answerStr.replace("“", "\'");
+            answerStr = answerStr.replace("”", "\'");
+            answerStr = answerStr.replace(" ", "");
+
+            if(str.equals(answerStr)) {
+                return exercise.getExerciseScore();
+            } else {
+                String result = "";
+                float number = 0;
+                String[] answer = answerStr.split(";xiaaman;");
+                String[] myAnswer = str.split(";xiaaman;");
+                for(int i=0; i<answer.length; i++) {
+                    if(answer[i].equals(myAnswer[i])) {
+                        number++;
+                    }
+                }
+                return exercise.getExerciseScore()*(number/answer.length);
+            }
+        }
+
     }
 }

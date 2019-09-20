@@ -7,45 +7,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29188fd6-dbd5-4172-ad89-5b8a5df3506e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/AppLoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/LookScoreController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/utils/TempCollectionExercise.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/student_education_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/UserRelationshipController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/UserRelationshipDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/UserRelationship.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/UserRelationshipService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/UserRelationshipServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/test/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/config/WebAppConfigurer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/config/WebAppConfigurer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysCollectionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysCollectionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/CompileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/CompileController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysExerciseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysExerciseController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/ClassTeacherDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/ClassTeacherDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/CollectionExerciseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/CollectionExerciseDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/CourseCollectionDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/CourseCollectionDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysCollectionDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysCollectionDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysCourseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysCourseDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysExerciseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysExerciseDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysUserDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysExercise.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysExercise.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/ClassTeacherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/ClassTeacherService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/CollectionExerciseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/CollectionExerciseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/CourseCollectionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/CourseCollectionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysClassService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysClassService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysCollectionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysCollectionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysCourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysCourseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysExerciseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysExerciseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/ClassTeacherServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/ClassTeacherServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/CollectionExerciseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/CollectionExerciseServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/CourseCollectionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/CourseCollectionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysClassServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysClassServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysCollectionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysCollectionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysCourseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysCourseServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysExerciseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysExerciseServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysUserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/utils/CompileUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/utils/CompileUnit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/nchu/xiaaman/student_education/StudentEducationApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/nchu/xiaaman/student_education/StudentEducationApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student_education.iml" beforeDir="false" afterPath="$PROJECT_DIR$/student_education.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/META-INF/MANIFEST.MF" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -274,7 +249,15 @@
       <workItem from="1567933861669" duration="6674000" />
       <workItem from="1567988815496" duration="3541000" />
       <workItem from="1568075195569" duration="26111000" />
-      <workItem from="1568418582417" duration="16239000" />
+      <workItem from="1568418582417" duration="16536000" />
+      <workItem from="1568511373230" duration="9700000" />
+      <workItem from="1568591279545" duration="26205000" />
+      <workItem from="1568684498049" duration="394000" />
+      <workItem from="1568685897241" duration="3704000" />
+      <workItem from="1568717894514" duration="4518000" />
+      <workItem from="1568731155774" duration="14119000" />
+      <workItem from="1568769655371" duration="7135000" />
+      <workItem from="1568851844631" duration="8114000" />
     </task>
     <task id="LOCAL-00001" summary="初步完成导航栏自动加载">
       <created>1563543496559</created>
@@ -332,7 +315,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566184339820</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="将题目上传完善为多种题型">
+      <created>1568462628243</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1568462628244</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,6 +364,14 @@
     <MESSAGE value="完成对用户的管理，包括学生导入" />
     <MESSAGE value="完成角色权限管理" />
     <MESSAGE value="完成代码编译、记录成绩、解决编译死循环问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成代码编译、记录成绩、解决编译死循环问题" />
+    <MESSAGE value="将题目上传完善为多种题型" />
+    <option name="LAST_COMMIT_MESSAGE" value="将题目上传完善为多种题型" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="result" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

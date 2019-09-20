@@ -27,11 +27,16 @@ public class SysExerciseController {
     @RequestMapping(value = "/get")
     // 查询题库
     public String getSysExerciseList(@RequestParam(value = "page",defaultValue = "1") int page,
-                                     @RequestParam(value = "size",defaultValue = "10") int size) {
+                                     @RequestParam(value = "size",defaultValue = "10") int size, HttpSession session) {
+        int rankValue =(Integer) session.getAttribute("rankValue");
         Pageable pageable = PageRequest.of(page-1, size);
         Page<SysExercise> exercisePageList = sysExerciseService.getAll(pageable);
         // 对数据进行封装修改，不能对jpa查出的数据直接修改，否则数据库的数据也会跟着修改
-        return new ExerciseUnion().union(exercisePageList.getContent(), exercisePageList.getTotalElements());
+        if(rankValue >= 8) {
+            return JSONObject.toJSONString(exercisePageList);
+        } else {
+            return new ExerciseUnion().union(exercisePageList.getContent(), exercisePageList.getTotalElements());
+        }
     }
 
     @MyLog(value = "动态查询题库")  //这里添加了AOP的自定义注解
@@ -58,11 +63,11 @@ public class SysExerciseController {
     public int modifyExercise(@RequestBody SysExercise sysExercise) {
         SysExercise newExercise = sysExerciseService.getById(sysExercise.getExerciseId());
         newExercise.setExerciseName(sysExercise.getExerciseName());
-        newExercise.setExerciseDescription(sysExercise.getExerciseDescription());
-        newExercise.setExerciseInputExample(sysExercise.getExerciseInputExample());
-        newExercise.setExerciseOutputExample(sysExercise.getExerciseOutputExample());
-        newExercise.setExerciseWarning(sysExercise.getExerciseWarning());
+        newExercise.setExerciseScore(sysExercise.getExerciseScore());
         newExercise.setExerciseLabel(sysExercise.getExerciseLabel());
+        if(sysExercise.getExerciseCode() != null && sysExercise.getExerciseCode().length()>0) {
+            newExercise.setExerciseCode(sysExercise.getExerciseCode());
+        }
         sysExerciseService.saveExercise(newExercise);
         return 200;
     }
@@ -145,4 +150,17 @@ public class SysExerciseController {
         return JSONObject.toJSONString(sysExerciseService.getExerciseNameList(exerciseType));
     }
 
+    //通过题目id查询题目类型
+    @RequestMapping(value = "/getExerciseType")
+    public int getExerciseTypeById(@RequestParam("exerciseId") String exerciseId) {
+        return sysExerciseService.getById(exerciseId).getExerciseType();
+    }
+
+    //查询填空题的空数
+    @RequestMapping(value = "/getBlankNumbers")
+    public int getBlankNumbers(@RequestParam("exerciseId") String exerciseId) {
+        String answer = sysExerciseService.getById(exerciseId).getExerciseCode();
+        String[] number = answer.split(";xiaaman;");
+        return number.length;
+    }
 }
