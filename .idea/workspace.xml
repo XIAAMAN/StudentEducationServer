@@ -7,21 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29188fd6-dbd5-4172-ad89-5b8a5df3506e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/UserRelationshipController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/UserRelationshipDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/UserRelationship.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/UserRelationshipService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/UserRelationshipServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/test/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/AppLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/AppLoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/CompileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/CompileController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysExerciseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysExerciseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysExercise.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysExercise.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/utils/CompileUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/utils/CompileUnit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/nchu/xiaaman/student_education/StudentEducationApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/nchu/xiaaman/student_education/StudentEducationApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/META-INF/MANIFEST.MF" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -257,7 +246,12 @@
       <workItem from="1568717894514" duration="4518000" />
       <workItem from="1568731155774" duration="14119000" />
       <workItem from="1568769655371" duration="7135000" />
-      <workItem from="1568851844631" duration="8114000" />
+      <workItem from="1568851844631" duration="13449000" />
+      <workItem from="1569119962388" duration="7587000" />
+      <workItem from="1569250255213" duration="484000" />
+      <workItem from="1569251010416" duration="1435000" />
+      <workItem from="1569282477352" duration="8607000" />
+      <workItem from="1569336573520" duration="2478000" />
     </task>
     <task id="LOCAL-00001" summary="初步完成导航栏自动加载">
       <created>1563543496559</created>
@@ -322,7 +316,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568462628244</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="完成多种题型答题排版">
+      <created>1568938415770</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1568938415771</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -365,7 +366,8 @@
     <MESSAGE value="完成角色权限管理" />
     <MESSAGE value="完成代码编译、记录成绩、解决编译死循环问题" />
     <MESSAGE value="将题目上传完善为多种题型" />
-    <option name="LAST_COMMIT_MESSAGE" value="将题目上传完善为多种题型" />
+    <MESSAGE value="完成多种题型答题排版" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成多种题型答题排版" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

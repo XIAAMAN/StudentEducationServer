@@ -62,7 +62,7 @@ public class SysExerciseController {
     @RequestMapping(value = "/modify")
     public int modifyExercise(@RequestBody SysExercise sysExercise) {
         SysExercise newExercise = sysExerciseService.getById(sysExercise.getExerciseId());
-        newExercise.setExerciseName(sysExercise.getExerciseName());
+//        newExercise.setExerciseName(sysExercise.getExerciseName());
         newExercise.setExerciseScore(sysExercise.getExerciseScore());
         newExercise.setExerciseLabel(sysExercise.getExerciseLabel());
         if(sysExercise.getExerciseCode() != null && sysExercise.getExerciseCode().length()>0) {

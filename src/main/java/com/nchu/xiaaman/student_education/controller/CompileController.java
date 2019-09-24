@@ -104,6 +104,13 @@ public class CompileController {
             object.put("result", "题目已提交10次，不能再提交");
             return object.toJSONString();
         }
+        //主观题
+        if(unionData.getExercise().getExerciseType() == 6) {
+            object.put("state", "200");
+            object.put("result", "答案已提交，等待教师评分");
+            saveScoreInfo(user, unionData.getExercise(), unionData.getCollectionId(), 0);
+            return object.toJSONString();
+        }
         if(unionData.getExercise().getExerciseType() != 1) {
             float otherScore = dealSubmitOtherScore(user, unionData.getExercise(), unionData.getCollectionId());
             otherScore = Float.parseFloat(String.format("%.1f", otherScore));     //保留一位小数
@@ -165,6 +172,12 @@ public class CompileController {
             object.put("result", "题目已提交10次，不能再提交");
             return object.toJSONString();
         }
+        //主观题不能自动评分
+        if(exercise.getExerciseType() == 6) {
+            object.put("state", "200");
+            object.put("result", "抱歉，主观题不能自动评分");
+            return object.toJSONString();
+        }
         if(exercise.getExerciseType() !=1) {
             return dealOtherExercise(exercise, user);
         } else {
@@ -185,27 +198,27 @@ public class CompileController {
 //                    String inputStirng = IOUtils.toString(inputFiles.get(i).getFile(), String.valueOf(StandardCharsets.UTF_8));
 //                    inputFiles.get(i).getFile().close();
                     String runOUtCome = run(inputFiles.get(i).getFile(), compileUnitPractice);
-                    System.out.println("系统默认字符编码：" + Charset.defaultCharset());
+//                    System.out.println("系统默认字符编码：" + Charset.defaultCharset());
 //                    runOUtCome = new String(runOUtCome.getBytes(), "UTF-8");
-                    if(runOUtCome.equals(new String(runOUtCome.getBytes(),"GBK"))) {
-                        System.out.println("GBK");
-                    } else if(runOUtCome.equals(new String(runOUtCome.getBytes(),"UTF-8"))) {
-                        System.out.println("UTF-8");
-                    } else if(runOUtCome.equals(new String(runOUtCome.getBytes(),"GB2312"))) {
-                        System.out.println("GB2312");
-                    }else if(runOUtCome.equals(new String(runOUtCome.getBytes(),"ISO-8859-1"))){
-                        System.out.println("ISO-8859-1");
-                    }else {
-                        System.out.println("不知道");
-                    }
+//                    if(runOUtCome.equals(new String(runOUtCome.getBytes(),"GBK"))) {
+//                        System.out.println("GBK");
+//                    } else if(runOUtCome.equals(new String(runOUtCome.getBytes(),"UTF-8"))) {
+//                        System.out.println("UTF-8");
+//                    } else if(runOUtCome.equals(new String(runOUtCome.getBytes(),"GB2312"))) {
+//                        System.out.println("GB2312");
+//                    }else if(runOUtCome.equals(new String(runOUtCome.getBytes(),"ISO-8859-1"))){
+//                        System.out.println("ISO-8859-1");
+//                    }else {
+//                        System.out.println("不知道");
+//                    }
 
-                    System.out.println("输出结果：" + runOUtCome);
+//                    System.out.println("输出结果：" + runOUtCome);
                     if(compileUnitPractice.getIsSuccess()) {
                         for(int j=0; j<outputFiles.size(); j++) {
 
                             if(inputFiles.get(i).getFileName().equals(outputFiles.get(j).getFileName())) {
                                 String tempTestOUt = IOUtils.toString(outputFiles.get(j).getFile(), String.valueOf(StandardCharsets.UTF_8));
-                                System.out.println("测试结果: " +tempTestOUt +"\n");
+//                                System.out.println("测试结果: " +tempTestOUt +"\n");
                                 if(runOUtCome.equals(tempTestOUt)) {
                                     rightNumber ++;
                                 }
@@ -489,6 +502,35 @@ public class CompileController {
                 object.put("state", "400");
                 object.put("result", result);
             }
+//        }else if(sysExercise.getExerciseType() == 5) {
+//            String myAnswer[] = sysExercise.getExerciseCode().split("");
+//            String answer[] = temp.getExerciseCode().split("");
+//            float number = 0;
+//            if(temp.getExerciseCode().equals(sysExercise.getExerciseCode())) {
+//                dealSuccessExercisePractice(user, sysExercise);
+//                object.put("state", "200");
+//                object.put("result", "恭喜你，答题正确，再接再厉");
+//            } else {
+//                for(int i=0; i<myAnswer.length; i++) {
+//                    for(int j=0; j<answer.length; j++) {
+//                        if(j==answer.length-1 && !(myAnswer[i].equals(answer[j]))) {
+//                            dealFailedExercisePractice(user, sysExercise);
+//                            object.put("state", "400");
+//                            object.put("result", "很遗憾，答题失败，继续加油");
+//                            return object.toJSONString();
+//                        }
+//                        if(myAnswer[i].equals(answer[j])) {
+//                            number++;
+//                        }
+//                    }
+//                }
+//                dealFailedExercisePractice(user, sysExercise);
+//                object.put("state", "400");
+//                object.put("result", "很遗憾，答题错误");
+//            }
+//
+
+
         } else {
             if(temp.getExerciseCode().equals(sysExercise.getExerciseCode())) {
                 dealSuccessExercisePractice(user, sysExercise);
@@ -513,6 +555,25 @@ public class CompileController {
                 return exercise.getExerciseScore();
             } else {
                 return 0;
+            }
+        }else if(exercise.getExerciseType() == 5){
+            float number = 2;
+            String myAnswer[] = exercise.getExerciseCode().split("");
+            String answer[] = answerExercise.getExerciseCode().split("");
+            if(answerExercise.getExerciseCode().equals(exercise.getExerciseCode())) {
+                return exercise.getExerciseScore();
+            } else {
+                for(int i=0; i<myAnswer.length; i++) {
+                    for(int j=0; j<answer.length; j++) {
+                        if(j==answer.length-1 && !(myAnswer[i].equals(answer[j]))) {
+                            return 0;
+                        }
+                        if(myAnswer[i].equals(answer[j])) {
+                            break;
+                        }
+                    }
+                }
+                return exercise.getExerciseScore()/number;
             }
         } else {
             String str = exercise.getExerciseCode();
