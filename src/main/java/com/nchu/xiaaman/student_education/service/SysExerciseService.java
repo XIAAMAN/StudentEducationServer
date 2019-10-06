@@ -20,4 +20,5 @@ public interface SysExerciseService {
     List<String> getExerciseNameList();
     String getExerciseIdByName(String exerciseName);
     List<String> getExerciseNameList(int exerciseType);
+    String getExerciseIdByDescription(String exerciseDescription);
 }

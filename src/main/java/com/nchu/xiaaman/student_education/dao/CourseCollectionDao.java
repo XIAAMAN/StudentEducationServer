@@ -17,6 +17,10 @@ public interface CourseCollectionDao extends JpaRepository<CourseCollection, Str
     @Query(value = "select * from course_collection where collection_id = ?1", nativeQuery = true)
     List<CourseCollection> getByCollectionId(String collection_id);
 
+    //根据课程id和题目集id查询
+    @Query(value = "select * from course_collection where collection_id = ?1 and course_id = ?2", nativeQuery = true)
+    CourseCollection getByCollectionIdAndCourseId(String collection_id, String course_id);
+
 
     //根据课程名称删除里面所有的题目集
     @Transactional

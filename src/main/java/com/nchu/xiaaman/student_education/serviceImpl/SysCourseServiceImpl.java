@@ -53,4 +53,9 @@ public class SysCourseServiceImpl implements SysCourseService {
     public SysCourse getBycourseNameandClass(String courseName, String courseClass) {
         return sysCourseDao.getBycourseNameandClass(courseName, courseClass);
     }
+
+    @Override
+    public List<String> getCourseNameList() {
+        return sysCourseDao.getCourseNameList();
+    }
 }

@@ -10,4 +10,5 @@ public interface CourseCollectionService {
     void saveCourseCollection(CourseCollection courseCollection);
     void deleteCollectionListByCourseId(String courseId);
     List<CourseCollection> getByCollectionId(String collection_id);
+    CourseCollection getByCollectionIdAndCourseId(String collection_id, String course_id);
 }

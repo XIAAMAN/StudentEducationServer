@@ -2,14 +2,8 @@ package com.nchu.xiaaman.student_education.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.nchu.xiaaman.student_education.config.MyLog;
-import com.nchu.xiaaman.student_education.domain.CollectionExercise;
-import com.nchu.xiaaman.student_education.domain.CourseCollection;
-import com.nchu.xiaaman.student_education.domain.SysCollection;
-import com.nchu.xiaaman.student_education.domain.SysExercise;
-import com.nchu.xiaaman.student_education.service.CollectionExerciseService;
-import com.nchu.xiaaman.student_education.service.CourseCollectionService;
-import com.nchu.xiaaman.student_education.service.SysCollectionService;
-import com.nchu.xiaaman.student_education.service.SysExerciseService;
+import com.nchu.xiaaman.student_education.domain.*;
+import com.nchu.xiaaman.student_education.service.*;
 import com.nchu.xiaaman.student_education.utils.TempCollectionExercise;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.Entity;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/sys_collection")
 public class SysCollectionController {
+    @Autowired
+    private ExerciseScoreService exerciseScoreService;
+
     @Autowired
     private SysCollectionService sysCollectionService;
 
@@ -68,6 +66,17 @@ public class SysCollectionController {
 
     }
 
+    @MyLog(value = "修改题目集")  //这里添加了AOP的自定义注解
+    @RequestMapping(value = "/update")
+    public int updateCollection(@RequestBody SysCollection sysCollection) {
+        SysCollection collection = sysCollectionService.getById(sysCollection.getCollectionId());
+        collection.setCollectionName(sysCollection.getCollectionName());
+        collection.setCollectionStartTime(sysCollection.getCollectionStartTime());
+        collection.setCollectionEndTime(sysCollection.getCollectionEndTime());
+        sysCollectionService.saveCollection(collection);
+        return 200;
+    }
+
     @MyLog(value = "删除题目集")  //这里添加了AOP的自定义注解
     @RequestMapping(value = "/delete")
     public int deleteCollection(@RequestParam("collectionId") String collectionId) {
@@ -102,7 +111,7 @@ public class SysCollectionController {
 
         for(int i=0; i<tempCollectionExercise.getExerciseListValue().length; i++) {
             //判断该题目是否已经添加到题目集中
-            String exerciseId = sysExerciseService.getExerciseIdByName(tempCollectionExercise.getExerciseListValue()[i]);
+            String exerciseId = sysExerciseService.getExerciseIdByDescription(tempCollectionExercise.getExerciseListValue()[i]);
             collectionExercise = new CollectionExercise();
             collectionExercise.setCollectionId(tempCollectionExercise.getCollectionId());
             collectionExercise.setExerciseId(exerciseId);
@@ -123,7 +132,7 @@ public class SysCollectionController {
             sysExercise = sysExerciseService.getById(exerciseIdList.get(i));
             //添加当前题目类型
             if(sysExercise.getExerciseType() == exerciseType) {
-                exerciseNameList.add(sysExercise.getExerciseName());
+                exerciseNameList.add(sysExercise.getExerciseDescription());
             }
 
         }
@@ -133,9 +142,11 @@ public class SysCollectionController {
 
     //根据题目集id查询所有题目
     @RequestMapping(value = "/getExerciseList")
-    public String getExerciseList(@RequestParam("collectionId") String collectionId) {
+    public String getExerciseList(@RequestParam("collectionId") String collectionId, HttpSession session) {
         List<SysExercise> exerciseList = new ArrayList<>();
         List<SysExercise> exerciseListCopy = new ArrayList<>();
+        SysUser user = (SysUser)session.getAttribute("user");
+        ExerciseScore exerciseScore;
         //获得所有题目id
         List<String> exerciseId = collectionExerciseService.getExerciseIdListByCollectionId(collectionId);
         for(int i=0; i<exerciseId.size(); i++) {
@@ -143,8 +154,13 @@ public class SysCollectionController {
         }
         for(int i=0; i<exerciseList.size(); i++) {
             SysExercise exercise = new SysExercise();
+            exerciseScore = exerciseScoreService.getByUserIdExerciseIdAndCollectionId(exerciseList.get(i).getExerciseId(), user.getUserId(), collectionId);
             BeanUtils.copyProperties(exerciseList.get(i), exercise);
-            exercise.setExerciseCode("");
+            if(exerciseScore != null) {
+                exercise.setExerciseCode(exerciseScore.getExerciseCode());
+            } else {
+                exercise.setExerciseCode("");
+            }
             exerciseListCopy.add(exercise);
         }
         return exerciseListCopy.toString();

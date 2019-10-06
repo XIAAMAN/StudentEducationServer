@@ -15,4 +15,5 @@ public interface SysCourseService {
     String getCourseIdByName(String courseName);
     List<SysCourse> getCourseId(String classNumber);
     SysCourse getBycourseNameandClass(String courseName, String courseClass);
+    List<String> getCourseNameList();
 }

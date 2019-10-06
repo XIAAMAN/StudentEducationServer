@@ -62,26 +62,29 @@ public class CompileController {
         compileUnitTest.setFileUrl(exercise.getExerciseFileUrl());
         compileUnitTest.setInputCode(exercise.getExerciseInputExample());
         //返回对象
-        JSONObject object = new JSONObject();
+//        JSONObject object = new JSONObject();
         String compileResult = compileUnitTest.compile(exercise.getExerciseCode());
         if("".equals(compileResult)) {
             //编译成功
             String result = compileUnitTest.runExe();
-            if(compileUnitTest.getIsSuccess()) {
-                //运行成功
-                object.put("state", "200");
-            } else {
-                object.put("state", "400");
-            }
-            object.put("result", result);
-            return object.toJSONString();
+//            if(compileUnitTest.getIsSuccess()) {
+//                //运行成功
+//                object.put("state", "200");
+
+//            } else {
+//                object.put("state", "400");
+//            }
+//            object.put("result", result);
+//            return object.toJSONString();
+            return JSONObject.toJSONString(result);
 
         } else {
             //编译失败，保存编译信息
             saveCompileInfo(user, exercise, compileResult);
-            object.put("state", "400");
-            object.put("result", compileResult);
-            return object.toJSONString();
+//            object.put("state", "400");
+//            object.put("result", compileResult);
+//            return object.toJSONString();
+            return JSONObject.toJSONString(compileResult);
         }
     }
 
@@ -90,34 +93,37 @@ public class CompileController {
     public String compileSubmit(@RequestBody UnionData unionData, HttpSession session) throws IOException {
         SysUser user = (SysUser) session.getAttribute("user");
         float score = 0;
-
         CompileUnit compileUnitSubmit = new CompileUnit();
         CODE_PATH = base + user.getUserName() + "\\";
         compileUnitSubmit.setUserName(user.getUserName());
         compileUnitSubmit.setFileUrl(unionData.getExercise().getExerciseFileUrl());
         compileUnitSubmit.setInputCode(unionData.getExercise().getExerciseInputExample());
-        JSONObject object = new JSONObject();
+//        JSONObject object = new JSONObject();
         int rightNumber = 0;
         int fileNumber = 0;
-        if(getSubmitTimes(user, unionData.getExercise(), unionData.getCollectionId()) >= 10) {
-            object.put("state", "600");
-            object.put("result", "题目已提交10次，不能再提交");
-            return object.toJSONString();
+        //对编程题设置提交次数限制
+        if(getSubmitTimes(user, unionData.getExercise(), unionData.getCollectionId()) >= 10 && unionData.getExercise().getExerciseType() == 1) {
+//            object.put("state", "600");
+//            object.put("result", "题目已提交10次，不能再提交");
+//            return object.toJSONString();
+            return JSONObject.toJSONString("提交失败，提交次数已达到上限");
         }
         //主观题
         if(unionData.getExercise().getExerciseType() == 6) {
-            object.put("state", "200");
-            object.put("result", "答案已提交，等待教师评分");
+//            object.put("state", "200");
+//            object.put("result", "答案已提交，等待教师评分");
             saveScoreInfo(user, unionData.getExercise(), unionData.getCollectionId(), 0);
-            return object.toJSONString();
+//            return object.toJSONString();
+            return JSONObject.toJSONString("答案已提交");
         }
         if(unionData.getExercise().getExerciseType() != 1) {
             float otherScore = dealSubmitOtherScore(user, unionData.getExercise(), unionData.getCollectionId());
             otherScore = Float.parseFloat(String.format("%.1f", otherScore));     //保留一位小数
             saveScoreInfo(user, unionData.getExercise(), unionData.getCollectionId(), otherScore);
-            object.put("state", "200");
-            object.put("result", "本题最终得分: "+otherScore +"分");
-            return object.toJSONString();
+//            object.put("state", "200");
+//            object.put("result", "本题最终得分: "+otherScore +"分");
+//            return object.toJSONString();
+            return JSONObject.toJSONString("答案已提交");
         }
         String result = compileUnitSubmit.compile(unionData.getExercise().getExerciseCode());
         if(result.equals("")) {
@@ -138,27 +144,30 @@ public class CompileController {
                 }else {
                     //运行失败
                     saveScoreInfo(user, unionData.getExercise(), unionData.getCollectionId(), 0);
-                    object.put("state", "400");
-                    object.put("result", runOUtCome);
-                    return object.toJSONString();
+//                    object.put("state", "400");
+//                    object.put("result", runOUtCome);
+//                    return object.toJSONString();
+                    return JSONObject.toJSONString(runOUtCome);
                 }
             }
         } else {
             //编译失败,保存编译信息
             saveCompileInfo(user, unionData.getExercise(), result);
             saveScoreInfo(user, unionData.getExercise(), unionData.getCollectionId(), 0);
-            object.put("state", "400");
-            object.put("result", result);
-            return object.toJSONString();
+//            object.put("state", "400");
+//            object.put("result", result);
+//            return object.toJSONString();
+            return JSONObject.toJSONString(result);
         }
         score = (((float)rightNumber)/fileNumber) * unionData.getExercise().getExerciseScore();
         score = Float.parseFloat(String.format("%.1f", score));     //保留一位小数
         //保存学生成绩
         saveScoreInfo(user, unionData.getExercise(), unionData.getCollectionId(), score);
-        object.put("state", "200");
-        object.put("result", "本题最终得分: "+score +"分");
-
-        return object.toJSONString();
+//        object.put("state", "200");
+//        object.put("result", "本题最终得分: "+score +"分");
+//
+//        return object.toJSONString();
+        return JSONObject.toJSONString("本题最终得分: "+ score +"分");
     }
 
     //题目练习提交代码
@@ -167,10 +176,11 @@ public class CompileController {
     public String compilePractice(@RequestBody SysExercise exercise, HttpSession session) throws IOException {
         SysUser user = (SysUser) session.getAttribute("user");
         JSONObject object = new JSONObject();
-        if(getPracticeTimes(user, exercise) >= 10) {
+        if(getPracticeTimes(user, exercise) >= 10 && exercise.getExerciseType() == 1) {
             object.put("state", "600");
             object.put("result", "题目已提交10次，不能再提交");
             return object.toJSONString();
+
         }
         //主观题不能自动评分
         if(exercise.getExerciseType() == 6) {
@@ -487,20 +497,38 @@ public class CompileController {
                 object.put("result", "恭喜你，答题正确，再接再厉");
             } else {
                 String result = "";
+                String[] multiStr;
                 int number = 0;
+                int index=0;
                 String[] answer = answerStr.split(";xiaaman;");
                 String[] myAnswer = str.split(";xiaaman;");
                 for(int i=0; i<answer.length; i++) {
-                    number = i+1;
-                    if(answer[i].equals(myAnswer[i])) {
-                        result += "第"+ number +"问答对;   ";
-                    } else {
-                        result += "第"+ number +"问答错;   ";
+                    //应对多种答案
+                    index = i+1;
+                    multiStr = answer[i].split(";or;");
+                    for(int j=0; j<multiStr.length; j++) {
+                        if(!multiStr[j].equals(myAnswer[i]) && j==multiStr.length-1) {
+                            result += "第"+ index +"问答错;   ";
+                            break;
+                        }
+                        if(multiStr[j].equals(myAnswer[i])) {
+                            result += "第"+ index +"问答对;   ";
+                            number++;
+                            break;
+                        }
                     }
+
                 }
-                dealFailedExercisePractice(user, sysExercise);
-                object.put("state", "400");
-                object.put("result", result);
+                if(number == myAnswer.length) {
+                    dealSuccessExercisePractice(user, sysExercise);
+                    object.put("state", "200");
+                    object.put("result", "恭喜你，答题正确，再接再厉");
+                } else {
+                    dealFailedExercisePractice(user, sysExercise);
+                    object.put("state", "400");
+                    object.put("result", result);
+                }
+
             }
 //        }else if(sysExercise.getExerciseType() == 5) {
 //            String myAnswer[] = sysExercise.getExerciseCode().split("");
@@ -600,10 +628,16 @@ public class CompileController {
                 float number = 0;
                 String[] answer = answerStr.split(";xiaaman;");
                 String[] myAnswer = str.split(";xiaaman;");
+                String[] multiStr;
                 for(int i=0; i<answer.length; i++) {
-                    if(answer[i].equals(myAnswer[i])) {
-                        number++;
+                    multiStr = answer[i].split(";or;");
+                    for(int j=0; j<multiStr.length; j++) {
+                        if(multiStr[j].equals(myAnswer[i])) {
+                            number++;
+                            break;
+                        }
                     }
+
                 }
                 return exercise.getExerciseScore()*(number/answer.length);
             }

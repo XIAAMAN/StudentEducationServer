@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface SysExerciseDao extends JpaRepository<SysExercise, String> {
     //查询题库
-    @Query(value = "select * from sys_exercise where exercise_status = 1 and exercise_state = 1", nativeQuery = true)
+    @Query(value = "select * from sys_exercise where exercise_status = 1 and exercise_state = 1 order by exercise_time desc", nativeQuery = true)
     Page<SysExercise> getAll(Pageable pageable);
 
     //删除题目,设置为不可见
@@ -21,7 +21,7 @@ public interface SysExerciseDao extends JpaRepository<SysExercise, String> {
     @Query(value = "update sys_exercise set exercise_status = 0 where exercise_id =?1", nativeQuery = true)
     void deleteExerciseById(String exerciseId);
 
-    @Query(value = "select * from sys_exercise where exercise_name =?1", nativeQuery = true)
+    @Query(value = "select * from sys_exercise where exercise_name =?1 and exercise_status = 1 and exercise_state = 1", nativeQuery = true)
     SysExercise getSysExerciseByName(String exerciseName);
 
     //通过题目名称和题目标签进行模糊查询
@@ -45,19 +45,23 @@ public interface SysExerciseDao extends JpaRepository<SysExercise, String> {
     void modifyState(String checkName, String exerciseId);
 
     //学生查询题目练习
-    @Query(value = "select * from sys_exercise where exercise_state = 1 and exercise_status = 1 and exercise_free = 1", nativeQuery = true)
+    @Query(value = "select * from sys_exercise where exercise_state = 1 and exercise_status = 1 and exercise_free = 1 order by exercise_time desc", nativeQuery = true)
     Page<SysExercise> getExerciseFree(Pageable pageable);
 
     //查询所有可用通过审核的题目
-    @Query(value = "select exercise_name from sys_exercise where exercise_state = 1 and exercise_status = 1", nativeQuery = true)
+    @Query(value = "select exercise_name from sys_exercise where exercise_state = 1 and exercise_status = 1 order by exercise_time desc", nativeQuery = true)
     List<String> getExerciseNameList();
 
     //查询所有可用通过审核的题目
-    @Query(value = "select exercise_name from sys_exercise where exercise_state = 1 and exercise_status = 1 and exercise_type = ?1", nativeQuery = true)
+    @Query(value = "select exercise_description from sys_exercise where exercise_state = 1 and exercise_status = 1 and exercise_type = ?1 order by exercise_time desc", nativeQuery = true)
     List<String> getExerciseNameList(int exerciseType);
 
     //根据题目名称查询题目id
-    @Query(value = "select exercise_id from sys_exercise where exercise_name = ?1", nativeQuery = true)
+    @Query(value = "select exercise_id from sys_exercise where exercise_name = ?1 and exercise_status = 1 and exercise_state = 1", nativeQuery = true)
     String getExerciseIdByName(String exerciseName);
+
+    //根据题目描述查询题目id
+    @Query(value = "select exercise_id from sys_exercise where exercise_description = ?1 and exercise_status = 1 and exercise_state = 1", nativeQuery = true)
+    String getExerciseIdByDescription(String exerciseDescription);
 
 }

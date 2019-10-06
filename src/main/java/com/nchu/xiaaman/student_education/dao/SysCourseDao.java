@@ -33,4 +33,8 @@ public interface SysCourseDao extends JpaRepository<SysCourse, String> {
     @Query(value="select * from sys_course where course_name = ?1 and course_class like ?2", nativeQuery = true)
     SysCourse getBycourseNameandClass(String courseName, String courseClass);
 
+    //查询所有课程名称
+    @Query(value="select course_name from sys_course", nativeQuery = true)
+    List<String> getCourseNameList();
+
 }

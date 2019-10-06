@@ -40,6 +40,11 @@ public class SysCollectionServiceImpl implements SysCollectionService {
     }
 
     @Override
+    public SysCollection getById(String collectionId) {
+        return sysCollectionDao.getOne(collectionId);
+    }
+
+    @Override
     public String getNameById(String collectionId) {
         return sysCollectionDao.getNameById(collectionId);
     }

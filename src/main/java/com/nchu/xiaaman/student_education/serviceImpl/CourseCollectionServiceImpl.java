@@ -36,4 +36,9 @@ public class CourseCollectionServiceImpl implements CourseCollectionService {
     public List<CourseCollection> getByCollectionId(String collection_id) {
         return courseCollectionDao.getByCollectionId(collection_id);
     }
+
+    @Override
+    public CourseCollection getByCollectionIdAndCourseId(String collection_id, String course_id) {
+        return courseCollectionDao.getByCollectionIdAndCourseId(collection_id, course_id);
+    }
 }

@@ -79,4 +79,9 @@ public class SysExerciseServiceImpl implements SysExerciseService {
     public List<String> getExerciseNameList(int exerciseType) {
         return sysExerciseDao.getExerciseNameList(exerciseType);
     }
+
+    @Override
+    public String getExerciseIdByDescription(String exerciseDescription) {
+        return sysExerciseDao.getExerciseIdByDescription(exerciseDescription);
+    }
 }
