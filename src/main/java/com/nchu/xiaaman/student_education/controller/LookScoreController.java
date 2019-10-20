@@ -112,6 +112,7 @@ public class LookScoreController {
         SysExercise sysExercise;
         ExerciseScore exerciseScore;
         List<String> exerciseIdList;
+        String exerciseCode;
         exerciseIdList = collectionExerciseService.getExerciseIdListByCollectionId(collectionId);
         for(int i=0; i<exerciseIdList.size(); i++) {
             sysExercise = sysExerciseService.getById(exerciseIdList.get(i));
@@ -122,8 +123,16 @@ public class LookScoreController {
                 scoreDetail.setExerciseLabel(sysExercise.getExerciseLabel());
                 scoreDetail.setExerciseType(sysExercise.getExerciseType());
                 scoreDetail.setTimes(exerciseScore.getExerciseScoreTimes());
+                scoreDetail.setMyAnswer(exerciseScore.getExerciseCode());
                 scoreDetail.setRightScore(exerciseScore.getExerciseScoreAutoGrade());
                 scoreDetail.setTotalScore(sysExercise.getExerciseScore());
+                if(sysExercise.getExerciseType() == 4) {
+                    exerciseCode = sysExercise.getExerciseCode().replace(";or;","或").replace(";xiaaman;","       ");
+                    scoreDetail.setExerciseCode(exerciseCode);
+                    scoreDetail.setMyAnswer(exerciseScore.getExerciseCode().replace(";or;","或").replace(";xiaaman;","       "));
+                } else {
+                    scoreDetail.setExerciseCode(sysExercise.getExerciseCode());
+                }
                 scoreDetailList.add(scoreDetail);
             }
         }
@@ -143,6 +152,7 @@ public class LookScoreController {
         SysExercise sysExercise;
         ExerciseScore exerciseScore;
         List<String> exerciseIdList;
+        String exerciseCode;
         exerciseIdList = collectionExerciseService.getExerciseIdListByCollectionId(collectionId);
         for(int i=0; i<exerciseIdList.size(); i++) {
             sysExercise = sysExerciseService.getById(exerciseIdList.get(i));
@@ -154,7 +164,16 @@ public class LookScoreController {
                 scoreDetail.setExerciseType(sysExercise.getExerciseType());
                 scoreDetail.setTimes(exerciseScore.getExerciseScoreTimes());
                 scoreDetail.setRightScore(exerciseScore.getExerciseScoreAutoGrade());
+                scoreDetail.setMyAnswer(exerciseScore.getExerciseCode());
                 scoreDetail.setTotalScore(sysExercise.getExerciseScore());
+                if(sysExercise.getExerciseType() == 4) {
+                    exerciseCode = sysExercise.getExerciseCode().replace(";or;","或").replace(";xiaaman;","       ");
+                    scoreDetail.setExerciseCode(exerciseCode);
+                    scoreDetail.setMyAnswer(exerciseScore.getExerciseCode().replace(";or;","或").replace(";xiaaman;","       "));
+
+                } else {
+                    scoreDetail.setExerciseCode(sysExercise.getExerciseCode());
+                }
                 scoreDetailList.add(scoreDetail);
             }
         }
@@ -213,6 +232,72 @@ public class LookScoreController {
                             @RequestParam(value = "classNumber") String classNumber,
                             @RequestParam(value = "courseName") String courseName,
                             @RequestParam(value = "collectionName") String collectionName) {
+//        //判断该班级是否有这门课程
+//        if(sysCourseService.getBycourseNameandClass(courseName, "%"+classNumber+"%") == null) {
+//            return "400";
+//        }
+//        //判断该课程是否有该题目集
+//        String collectionId = sysCollectionService.getByCollectionName(collectionName).getCollectionId();
+//        String courseId = sysCourseService.getCourseIdByName(courseName);
+//        if(courseCollectionService.getByCollectionIdAndCourseId(collectionId, courseId) == null) {
+//            return "400";
+//        }
+//
+//        //该题目集下所有题目id
+//        List<String> exerciseIdList = collectionExerciseService.getExerciseIdListByCollectionId(collectionId);
+//        List<SysExercise> sysExerciseList = new ArrayList<>();
+//        for(int i=0; i<exerciseIdList.size(); i++) {
+//            sysExerciseList.add(sysExerciseService.getById(exerciseIdList.get(i)));
+//        }
+//        //该班级所有用户
+//        List<SysUser> userList = sysUserService.getUserListByClass(classNumber);
+//        List<TeacherScoreData> teacherScoreDataList = new ArrayList<>();
+//        TeacherScoreData teacherScoreData;
+//        ExerciseScore exerciseScore, tempExerciseScore;
+//        List<ExerciseScore> exerciseScoreList;
+//        SysUser sysUser;
+//        float totalScore;
+//        float getScore;
+//        int deciedNumber;
+//        List<ExerciseScore> exerciseScoreAll = exerciseScoreService.getAll();
+//        for(int i=0; i<userList.size(); i++) {
+//            totalScore = 0;
+//            getScore = 0;
+//            deciedNumber = 0;
+//            sysUser = userList.get(i);
+//            //获得该用户所有题目成绩记录
+//            exerciseScoreList = new ArrayList<>();
+//            for(int m=0; m<exerciseScoreAll.size(); m++) {
+//                if(exerciseScoreAll.get(m).getUserId().equals(sysUser.getUserId())) {
+//                    exerciseScoreList.add(exerciseScoreAll.get(m));
+//                    exerciseScoreAll.remove(m);
+//                    m--;
+//                }
+//            }
+////            exerciseScoreList = exerciseScoreService.getByUserId(sysUser.getUserId());
+//            teacherScoreData = new TeacherScoreData();
+//            teacherScoreData.setCollectionId(collectionId);
+//            teacherScoreData.setUserNumber(sysUser.getUserNumber());    //学号
+//            teacherScoreData.setUserRealName(sysUser.getUserRealName());    //姓名
+//            teacherScoreData.setExerciseNumber(exerciseIdList.size());  //题目总数
+//            for(int j=0; j<sysExerciseList.size(); j++) {
+//                totalScore += sysExerciseList.get(j).getExerciseScore();
+//                for(int k=0; k<exerciseScoreList.size();k++) {
+//                    tempExerciseScore = exerciseScoreList.get(k);
+//                    if(tempExerciseScore.getExerciseId().equals(sysExerciseList.get(j).getExerciseId()) && tempExerciseScore.getCollectionId().equals(collectionId)) {
+//                        deciedNumber++;
+//                        getScore += tempExerciseScore.getExerciseScoreAutoGrade();
+//                        break;
+//                    }
+//                }
+//            }
+//            teacherScoreData.setDeciedNumber(deciedNumber);     //题目提交数量
+//            teacherScoreData.setCollectionScore(getScore);      //得分
+//            teacherScoreData.setTotalScore(totalScore);     //总分
+//            teacherScoreDataList.add(teacherScoreData);
+//        }
+//        //获得所有已经结束的题目集
+//        return new TeacherScoreDataUnion().union(teacherScoreDataList, page, size);
         //判断该班级是否有这门课程
         if(sysCourseService.getBycourseNameandClass(courseName, "%"+classNumber+"%") == null) {
             return "400";
@@ -420,8 +505,26 @@ public class LookScoreController {
         private String exerciseLabel;   //题目标签
         private int exerciseType;    //题目类型
         private int times;  //提交次数
+        private String exerciseCode;       //参考答案
+        private String myAnswer;
         private float rightScore;   //得分
         private float totalScore;   //总分
+
+        public String getMyAnswer() {
+            return myAnswer;
+        }
+
+        public void setMyAnswer(String myAnswer) {
+            this.myAnswer = myAnswer;
+        }
+
+        public String getExerciseCode() {
+            return exerciseCode;
+        }
+
+        public void setExerciseCode(String exerciseCode) {
+            this.exerciseCode = exerciseCode;
+        }
 
         public String getExerciseName() {
             return exerciseName;

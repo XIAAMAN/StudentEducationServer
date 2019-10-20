@@ -115,6 +115,7 @@ public class CompileUnit {
         Process process = null;
         BufferedReader bufrIn = null;
         BufferedReader bufrError = null;
+        String realResult;
         try {
             // 执行命令, 返回一个子进程对象（命令在子进程中执行）
             process = Runtime.getRuntime().exec(cmd, null, dir);
@@ -149,10 +150,10 @@ public class CompileUnit {
             // 读取输出
             String line = null;
             while ((line = bufrIn.readLine()) != null) {
-                result.append(line);
+                result.append(line).append("\r\n");
             }
             while ((line = bufrError.readLine()) != null) {
-                result.append(line).append('\n');
+                result.append(line).append("\r\n");
                 isSuccess = false;
             }
         } finally {
@@ -164,7 +165,11 @@ public class CompileUnit {
             }
         }
         // 返回执行结果
-        return result.toString();
+        realResult = result.toString();
+        if(realResult.length()>0) {
+            realResult = realResult.substring(0,realResult.length()-2);
+        }
+        return realResult;
     }
 
     public String getInputCode() {

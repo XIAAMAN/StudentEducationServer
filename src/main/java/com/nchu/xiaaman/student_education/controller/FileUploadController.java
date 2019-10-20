@@ -205,4 +205,34 @@ public class FileUploadController {
         }
         return studentNumber;
     }
+
+    @RequestMapping(value = "/labWord")
+    public int saveLabWordFile (@RequestParam("file") MultipartFile file) {
+        String filePath = "D:\\实验报告\\"+file.getOriginalFilename();
+
+        File newFile = new File(filePath);
+        if (!newFile.getParentFile().exists()) { //判断文件父目录是否存在
+            newFile.getParentFile().mkdir();
+        }
+        try {
+            newFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(newFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            out.write(file.getBytes());
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return 200;
+    }
 }

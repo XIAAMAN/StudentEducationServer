@@ -12,36 +12,42 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CpuTest {
 
     public static void main(String[] args) {
-        final AtomicInteger seq = new AtomicInteger(0);
-
-        ScheduledExecutorService es = Executors.newScheduledThreadPool(20, new ThreadFactory() {
-            @Override
-            public Thread newThread(Runnable r) {
-                Thread th = new Thread(r);
-                th.setName("consumingthreads-" + seq.incrementAndGet());
-                return th;
-            }
-        });
-
-        for (int i = 0; i < 200; i++) {
-            es.scheduleAtFixedRate(new ConsumingCpuTask(), 0, 1, TimeUnit.MILLISECONDS);
-        }
-
-        // not terminate the es
+        String result = "xia\ndd";
+        String resultt = "xia\ndd\r\n";
+        resultt = resultt.substring(0,resultt.length()-2);
 
 
-
-        // another thread to print host cpu
-        ScheduledExecutorService printer = Executors.newSingleThreadScheduledExecutor(new ThreadFactory() {
-            @Override
-            public Thread newThread(Runnable r) {
-                Thread th = new Thread(r);
-                th.setName("printer");
-                return th;
-            }
-        });
-        // print every 10 seconds
-        printer.scheduleAtFixedRate(new PrintCurrentProcessCpuTask(), 0, 1, TimeUnit.SECONDS);
+        System.out.println(result.equals(resultt));
+//        final AtomicInteger seq = new AtomicInteger(0);
+//
+//        ScheduledExecutorService es = Executors.newScheduledThreadPool(20, new ThreadFactory() {
+//            @Override
+//            public Thread newThread(Runnable r) {
+//                Thread th = new Thread(r);
+//                th.setName("consumingthreads-" + seq.incrementAndGet());
+//                return th;
+//            }
+//        });
+//
+//        for (int i = 0; i < 200; i++) {
+//            es.scheduleAtFixedRate(new ConsumingCpuTask(), 0, 1, TimeUnit.MILLISECONDS);
+//        }
+//
+//        // not terminate the es
+//
+//
+//
+//        // another thread to print host cpu
+//        ScheduledExecutorService printer = Executors.newSingleThreadScheduledExecutor(new ThreadFactory() {
+//            @Override
+//            public Thread newThread(Runnable r) {
+//                Thread th = new Thread(r);
+//                th.setName("printer");
+//                return th;
+//            }
+//        });
+//        // print every 10 seconds
+//        printer.scheduleAtFixedRate(new PrintCurrentProcessCpuTask(), 0, 1, TimeUnit.SECONDS);
     }
 
     static final int PROCESSOR_COUNT = Runtime.getRuntime().availableProcessors();

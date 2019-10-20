@@ -102,7 +102,7 @@ public class CompileController {
         int rightNumber = 0;
         int fileNumber = 0;
         //对编程题设置提交次数限制
-        if(getSubmitTimes(user, unionData.getExercise(), unionData.getCollectionId()) >= 10 && unionData.getExercise().getExerciseType() == 1) {
+        if(getSubmitTimes(user, unionData.getExercise(), unionData.getCollectionId()) >= 30 && unionData.getExercise().getExerciseType() == 1) {
 //            object.put("state", "600");
 //            object.put("result", "题目已提交10次，不能再提交");
 //            return object.toJSONString();
@@ -176,9 +176,9 @@ public class CompileController {
     public String compilePractice(@RequestBody SysExercise exercise, HttpSession session) throws IOException {
         SysUser user = (SysUser) session.getAttribute("user");
         JSONObject object = new JSONObject();
-        if(getPracticeTimes(user, exercise) >= 10 && exercise.getExerciseType() == 1) {
+        if(getPracticeTimes(user, exercise) >= 30 && exercise.getExerciseType() == 1) {
             object.put("state", "600");
-            object.put("result", "题目已提交10次，不能再提交");
+            object.put("result", "题目已提交30次，不能再提交");
             return object.toJSONString();
 
         }
@@ -228,8 +228,8 @@ public class CompileController {
 
                             if(inputFiles.get(i).getFileName().equals(outputFiles.get(j).getFileName())) {
                                 String tempTestOUt = IOUtils.toString(outputFiles.get(j).getFile(), String.valueOf(StandardCharsets.UTF_8));
-//                                System.out.println("测试结果: " +tempTestOUt +"\n");
-                                if(runOUtCome.equals(tempTestOUt)) {
+
+                                if(tempTestOUt.equals(runOUtCome)) {
                                     rightNumber ++;
                                 }
                                 outputFiles.get(j).getFile().close();
@@ -262,7 +262,6 @@ public class CompileController {
                 object.put("state", "400");
                 object.put("result", "很遗憾，答题失败，继续加油，早日找出bug");
             }
-            System.out.println("答对数量 ："+rightNumber);
             return object.toJSONString();
         }
     }

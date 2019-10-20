@@ -23,6 +23,7 @@ public class AppLoginController {
     public Md5Utils md5Utils;
     @RequestMapping(value = "/appLogin")
     public void login(HttpServletRequest req, HttpServletResponse rep) throws IOException {
+        System.out.println("进来了");
         String userName = req.getParameter("userName");
         String password = req.getParameter("userPassword");
         String message = "";

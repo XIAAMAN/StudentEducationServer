@@ -6,6 +6,7 @@ import com.nchu.xiaaman.student_education.service.ExerciseScoreService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class ExerciseScoreServiceImpl implements ExerciseScoreService {
@@ -24,5 +25,20 @@ public class ExerciseScoreServiceImpl implements ExerciseScoreService {
     @Override
     public ExerciseScore getById(String id) {
         return exerciseScoreDao.getOne(id);
+    }
+
+    @Override
+    public List<ExerciseScore> getByExerciseId(String exerciseId) {
+        return exerciseScoreDao.getByExerciseId(exerciseId);
+    }
+
+    @Override
+    public List<ExerciseScore> getByUserId(String userId) {
+        return exerciseScoreDao.getByUserId(userId);
+    }
+
+    @Override
+    public List<ExerciseScore> getAll() {
+        return exerciseScoreDao.findAll();
     }
 }

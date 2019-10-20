@@ -28,7 +28,7 @@ public class ExerciseScore {
     private float exerciseScoreAutoGrade;       //自动批改成绩
 
     @Column(name = "exercise_score_manual_grade")
-    private float exerciseScoreManualGrade;     //手动批改成绩
+    private int exerciseScoreManualGrade;     //手动批改成绩
 
     @Column(name = "exercise_score_times")
     private int exerciseScoreTimes;      //提交次数
@@ -79,11 +79,11 @@ public class ExerciseScore {
         this.exerciseScoreAutoGrade = exerciseScoreAutoGrade;
     }
 
-    public float getExerciseScoreManualGrade() {
+    public int getExerciseScoreManualGrade() {
         return exerciseScoreManualGrade;
     }
 
-    public void setExerciseScoreManualGrade(float exerciseScoreManualGrade) {
+    public void setExerciseScoreManualGrade(int exerciseScoreManualGrade) {
         this.exerciseScoreManualGrade = exerciseScoreManualGrade;
     }
 
