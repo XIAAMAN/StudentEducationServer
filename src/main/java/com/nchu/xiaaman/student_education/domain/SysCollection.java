@@ -1,11 +1,13 @@
 package com.nchu.xiaaman.student_education.domain;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "sys_collection")
+@Proxy(lazy = false)    //设置立即加载
 public class SysCollection {
     @Id
     @Column(name = "collection_id")

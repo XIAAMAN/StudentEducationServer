@@ -10,4 +10,5 @@ public interface CollectionExerciseService {
     CollectionExercise getByCollectionIdAndExerciseId(String collectionId, String exerciseId);
     List<String> getExerciseIdListByCollectionId(String collectionId);
     void deleteByCollectionIdAndExerciseId(String collectionId, String exerciseId);
+    CollectionExercise getOneCollectionExerciseByExerciseId(String exerciseId);
 }

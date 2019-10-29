@@ -1,8 +1,10 @@
 package com.nchu.xiaaman.student_education.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.nchu.xiaaman.student_education.config.MyLog;
+import com.nchu.xiaaman.student_education.domain.CollectionExercise;
 import com.nchu.xiaaman.student_education.domain.SysExercise;
 import com.nchu.xiaaman.student_education.domain.SysUser;
+import com.nchu.xiaaman.student_education.service.CollectionExerciseService;
 import com.nchu.xiaaman.student_education.service.SysExerciseService;
 import com.nchu.xiaaman.student_education.service.UserRoleService;
 import com.nchu.xiaaman.student_education.utils.ExerciseUnion;
@@ -19,9 +21,13 @@ import java.util.Date;
 
 @RestController
 @RequestMapping(value = "/sys_exercise")
+
 public class SysExerciseController {
     @Autowired
     private SysExerciseService sysExerciseService;
+
+    @Autowired
+    private CollectionExerciseService collectionExerciseService;
 
     @MyLog(value = "查询题库")  //这里添加了AOP的自定义注解
     @RequestMapping(value = "/get")
@@ -162,5 +168,16 @@ public class SysExerciseController {
         String answer = sysExerciseService.getById(exerciseId).getExerciseCode();
         String[] number = answer.split(";xiaaman;");
         return number.length;
+    }
+
+    //判断要删除的题目是否添加到题目集中
+    @RequestMapping(value = "/judgeDelete")
+    public int isDelete(@RequestParam("exerciseId") String exerciseId) {
+        CollectionExercise collectionExercise = collectionExerciseService.getOneCollectionExerciseByExerciseId(exerciseId);
+        if(collectionExercise == null) {
+            return 200;
+        } else {
+            return 400;
+        }
     }
 }

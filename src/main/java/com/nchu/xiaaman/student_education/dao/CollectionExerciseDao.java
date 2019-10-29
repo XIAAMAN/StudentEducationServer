@@ -29,5 +29,9 @@ public interface CollectionExerciseDao extends JpaRepository<CollectionExercise,
     @Query(value = "select exercise_id from collection_exercise where collection_id = ?1", nativeQuery = true)
     List<String> getExerciseIdListByCollectionId(String collectionId);
 
+    //根据题目id查询当前一条数据
+    @Query(value = "select * from collection_exercise where exercise_id = ?1 limit 1", nativeQuery = true)
+    CollectionExercise getOneByExerciseId(String exerciseId);
+
 
 }

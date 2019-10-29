@@ -36,4 +36,9 @@ public class CollectionExerciseServiceImpl implements CollectionExerciseService 
     public void deleteByCollectionIdAndExerciseId(String collectionId, String exerciseId) {
         collectionExerciseDao.deleteByCollectionIdAndExerciseId(collectionId, exerciseId);
     }
+
+    @Override
+    public CollectionExercise getOneCollectionExerciseByExerciseId(String exerciseId) {
+        return collectionExerciseDao.getOneByExerciseId(exerciseId);
+    }
 }

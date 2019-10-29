@@ -121,12 +121,11 @@ public class CompileUnit {
             process = Runtime.getRuntime().exec(cmd, null, dir);
             // 方法阻塞, 等待命令执行完成（成功会返回0）
 
-
             CompileUnit.Worker worker = new CompileUnit.Worker(process);
             worker.start();
 
             try {
-                worker.join(10000);     //设置10秒超时
+                worker.join(15000);     //设置15秒超时
                 if (worker.exit != null){
 //                    return worker.exit;
                 } else{

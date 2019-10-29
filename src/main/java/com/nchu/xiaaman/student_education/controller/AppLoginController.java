@@ -1,5 +1,6 @@
 package com.nchu.xiaaman.student_education.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.nchu.xiaaman.student_education.domain.SysUser;
 import com.nchu.xiaaman.student_education.service.SysUserService;
 import com.nchu.xiaaman.student_education.service.UserRoleService;
@@ -23,17 +24,19 @@ public class AppLoginController {
     public Md5Utils md5Utils;
     @RequestMapping(value = "/appLogin")
     public void login(HttpServletRequest req, HttpServletResponse rep) throws IOException {
-        System.out.println("进来了");
+        req.setCharacterEncoding("UTF-8");
+        rep.setContentType("text/html;charset=utf-8");
         String userName = req.getParameter("userName");
         String password = req.getParameter("userPassword");
         String message = "";
+
         password = md5Utils.md5(password);
         SysUser user = userService.getByNameAndPassword(userName, password);
 
         if(user!=null) {
             int rankValue = userRoleService.getMaxRoleRank(user.getUserId());
-            if(rankValue == 6) {
-                message = "200";
+            if(rankValue >= 6) {
+                message = JSONObject.toJSONString(user);
             } else {
                 message = "400";
             }

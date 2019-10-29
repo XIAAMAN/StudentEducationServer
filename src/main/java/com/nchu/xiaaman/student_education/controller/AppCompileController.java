@@ -1,12 +1,8 @@
 package com.nchu.xiaaman.student_education.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.nchu.xiaaman.student_education.config.MyLog;
 import com.nchu.xiaaman.student_education.domain.*;
-import com.nchu.xiaaman.student_education.service.ExerciseCompileService;
-import com.nchu.xiaaman.student_education.service.ExercisePracticeService;
-import com.nchu.xiaaman.student_education.service.ExerciseScoreService;
-import com.nchu.xiaaman.student_education.service.SysExerciseService;
+import com.nchu.xiaaman.student_education.service.*;
 import com.nchu.xiaaman.student_education.utils.CompileUnit;
 import com.nchu.xiaaman.student_education.utils.UnionData;
 import net.lingala.zip4j.core.ZipFile;
@@ -14,26 +10,26 @@ import net.lingala.zip4j.io.ZipInputStream;
 import net.lingala.zip4j.model.FileHeader;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@RestController
-@RequestMapping(value = "/compile")
-public class CompileController {
+@Controller
+@RequestMapping(value = "/appCompile")
+public class AppCompileController {
     @Autowired
     private ExercisePracticeService exercisePracticeService;
 
@@ -46,15 +42,20 @@ public class CompileController {
     @Autowired
     private SysExerciseService sysExerciseService;
 
+    @Autowired
+    private SysUserService sysUserService;
+
     private String CODE_PATH = "";
     private List<InputOutputFile> inputFiles;
     private List<InputOutputFile> outputFiles;
     private static final String base = "D:\\compileCode\\code\\";
 
-    @MyLog(value = "在线运行")  //这里添加了AOP的自定义注解
     @RequestMapping(value = "/test")
-    public String compileTest(@RequestBody SysExercise exercise, HttpSession session) {
-        SysUser user = (SysUser) session.getAttribute("user");
+    public void compileTest(@RequestBody List<SysExercise> exerciseList,  HttpServletRequest req,HttpServletResponse rep)  throws IOException {
+        req.setCharacterEncoding("UTF-8");
+        rep.setContentType("text/html;charset=utf-8");
+        SysExercise exercise = exerciseList.get(0);
+        SysUser user = sysUserService.getUserByUserName(exercise.getExerciseCheckUserName());
         CompileUnit compileUnitTest = new CompileUnit();
         //设置一些参数值
         compileUnitTest.setUserName(user.getUserName());
@@ -75,7 +76,10 @@ public class CompileController {
 //            }
 //            object.put("result", result);
 //            return object.toJSONString();
-            return JSONObject.toJSONString(result);
+            rep.getWriter().append(result).flush();
+            rep.getWriter().close();
+            return;
+//            return JSONObject.toJSONString(result);
 
         } else {
             //编译失败，保存编译信息
@@ -83,14 +87,22 @@ public class CompileController {
 //            object.put("state", "400");
 //            object.put("result", compileResult);
 //            return object.toJSONString();
-            return JSONObject.toJSONString(compileResult);
+            rep.getWriter().append(compileResult).flush();
+            rep.getWriter().close();
+            return;
+//            return JSONObject.toJSONString(compileResult);
         }
+
     }
 
-    @MyLog(value = "代码提交")  //这里添加了AOP的自定义注解
+
     @RequestMapping(value = "/submit")
-    public String compileSubmit(@RequestBody UnionData unionData, HttpSession session) throws IOException {
-        SysUser user = (SysUser) session.getAttribute("user");
+    public void submit(@RequestBody List<UnionData> unionDataList, HttpServletRequest req,HttpServletResponse rep) throws IOException {
+        req.setCharacterEncoding("UTF-8");
+        rep.setContentType("text/html;charset=utf-8");
+        UnionData unionData = unionDataList.get(0);
+        String userName = unionData.getExercise().getExerciseCheckUserName();
+        SysUser user = sysUserService.getUserByUserName(userName);
         float score = 0;
         String testDetail = "";
         CompileUnit compileUnitSubmit = new CompileUnit();
@@ -106,7 +118,10 @@ public class CompileController {
 //            object.put("state", "600");
 //            object.put("result", "题目已提交10次，不能再提交");
 //            return object.toJSONString();
-            return JSONObject.toJSONString("提交失败，提交次数已达到上限");
+            rep.getWriter().append("提交失败，提交次数已达到上限").flush();
+            rep.getWriter().close();
+            return;
+//            return JSONObject.toJSONString("提交失败，提交次数已达到上限");
         }
         //主观题
         if(unionData.getExercise().getExerciseType() == 6) {
@@ -114,7 +129,10 @@ public class CompileController {
 //            object.put("result", "答案已提交，等待教师评分");
             saveScoreInfo(user, unionData.getExercise(), unionData.getCollectionId(), 0);
 //            return object.toJSONString();
-            return JSONObject.toJSONString("答案已提交");
+            rep.getWriter().append("答案已提交").flush();
+            rep.getWriter().close();
+            return;
+//            return JSONObject.toJSONString("答案已提交");
         }
         if(unionData.getExercise().getExerciseType() != 1) {
             float otherScore = dealSubmitOtherScore(user, unionData.getExercise(), unionData.getCollectionId());
@@ -123,7 +141,11 @@ public class CompileController {
 //            object.put("state", "200");
 //            object.put("result", "本题最终得分: "+otherScore +"分");
 //            return object.toJSONString();
-            return JSONObject.toJSONString("答案已提交");
+
+            rep.getWriter().append("答案已提交").flush();
+            rep.getWriter().close();
+            return;
+//            return JSONObject.toJSONString("答案已提交");
         }
         String result = compileUnitSubmit.compile(unionData.getExercise().getExerciseCode());
         if(result.equals("")) {
@@ -159,7 +181,9 @@ public class CompileController {
 //                    object.put("state", "400");
 //                    object.put("result", runOUtCome);
 //                    return object.toJSONString();
-                    return JSONObject.toJSONString(runOUtCome);
+                    rep.getWriter().append(runOUtCome).flush();
+                    rep.getWriter().close();
+                    return;
                 }
             }
         } else {
@@ -169,7 +193,10 @@ public class CompileController {
 //            object.put("state", "400");
 //            object.put("result", result);
 //            return object.toJSONString();
-            return JSONObject.toJSONString(result);
+            rep.getWriter().append(result).flush();
+            rep.getWriter().close();
+            return;
+//            return JSONObject.toJSONString(result);
         }
         score = (((float)rightNumber)/fileNumber) * unionData.getExercise().getExerciseScore();
         score = Float.parseFloat(String.format("%.1f", score));     //保留一位小数
@@ -179,125 +206,12 @@ public class CompileController {
 //        object.put("result", "本题最终得分: "+score +"分");
 //
 //        return object.toJSONString();
-        return JSONObject.toJSONString("本题最终得分: "+ score +"分\n\n"+testDetail);
-    }
+        rep.getWriter().append("本题最终得分: "+ score +"分\n\n"+testDetail).flush();
+        rep.getWriter().close();
+        return;
+//        return JSONObject.toJSONString("本题最终得分: "+ score +"分");
 
-    //题目练习提交代码
-    @MyLog(value = "题目练习提交")  //这里添加了AOP的自定义注解
-    @RequestMapping(value = "/practice")
-    public String compilePractice(@RequestBody SysExercise exercise, HttpSession session) throws IOException {
-        SysUser user = (SysUser) session.getAttribute("user");
-        JSONObject object = new JSONObject();
-        String testDetail = "";
-        if(getPracticeTimes(user, exercise) >= 30 && exercise.getExerciseType() == 1) {
-            object.put("state", "600");
-            object.put("result", "题目已提交30次，不能再提交");
-            return object.toJSONString();
 
-        }
-        //主观题不能自动评分
-        if(exercise.getExerciseType() == 6) {
-            object.put("state", "200");
-            object.put("result", "抱歉，主观题不能自动评分");
-            return object.toJSONString();
-        }
-        if(exercise.getExerciseType() !=1) {
-            return dealOtherExercise(exercise, user);
-        } else {
-            int rightNumber = 0;
-            int fileNumber = 0;
-            CompileUnit compileUnitPractice = new CompileUnit();
-            CODE_PATH = base + user.getUserName() + "\\";
-            compileUnitPractice.setUserName(user.getUserName());
-            compileUnitPractice.setFileUrl(exercise.getExerciseFileUrl());
-            compileUnitPractice.setInputCode(exercise.getExerciseInputExample());
-            String result = compileUnitPractice.compile(exercise.getExerciseCode());
-            if(result.equals("")) {
-                //编译成功
-                //文件处理
-                dealFiles(exercise);
-                fileNumber = inputFiles.size();
-                for(int i=0; i<inputFiles.size(); i++) {
-//                    String inputStirng = IOUtils.toString(inputFiles.get(i).getFile(), String.valueOf(StandardCharsets.UTF_8));
-//                    inputFiles.get(i).getFile().close();
-                    String inputStr = IOUtils.toString(inputFiles.get(i).getFile(), String.valueOf(StandardCharsets.UTF_8));
-                    inputFiles.get(i).getFile().close();
-                    //写入输入测试点
-                    testDetail +="测试点：" +(i+1)+"\n"+ "测试输入："+ inputStr + "\n";
-                    String runOUtCome = run(inputStr, compileUnitPractice);
-
-//                    System.out.println("输出结果：" + runOUtCome);
-                    if(compileUnitPractice.getIsSuccess()) {
-//                        for(int j=0; j<outputFiles.size(); j++) {
-//
-//                            if(inputFiles.get(i).getFileName().equals(outputFiles.get(j).getFileName())) {
-//                                String tempTestOUt = IOUtils.toString(outputFiles.get(j).getFile(), String.valueOf(StandardCharsets.UTF_8));
-//                                //过滤掉空格
-//                                if(tempTestOUt.replace(" ","").equals(runOUtCome.replace(" ",""))) {
-//                                    rightNumber ++;
-//                                }
-//                                outputFiles.get(j).getFile().close();
-//                                break;
-//                            }
-//                        }
-
-                        for(int j=0; j<outputFiles.size(); j++) {
-                            if(inputFiles.get(i).getFileName().equals(outputFiles.get(j).getFileName())) {
-                                String answerOut = IOUtils.toString(outputFiles.get(j).getFile(), String.valueOf(StandardCharsets.UTF_8));
-                                outputFiles.get(j).getFile().close();
-                                testDetail+="测试输出：" + answerOut + "\n";
-                                //过滤掉空格带来的错误
-                                if(runOUtCome.replace(" ","").equals(answerOut.replace(" ",""))) {
-                                    rightNumber ++;
-                                    testDetail += "测试结果：通过\n\n";
-                                } else {
-                                    testDetail += "测试结果：未通过\n\n";
-                                }
-                            }
-                        }
-                    }else {
-                        //运行失败
-                        dealFailedExercisePractice(user, exercise);
-                        object.put("state", "400");
-                        object.put("result", runOUtCome);
-                        return object.toJSONString();
-                    }
-                }
-            } else {
-                //编译失败，保存编译信息
-                saveCompileInfo(user, exercise, result);
-                dealFailedExercisePractice(user, exercise);
-                object.put("state", "400");
-                object.put("result", result);
-                return object.toJSONString();
-            }
-
-            if(rightNumber == fileNumber) {
-                dealSuccessExercisePractice(user, exercise);
-                object.put("state", "200");
-                object.put("result", "恭喜你，答题正确，再接再厉\n\n" + testDetail);
-            }else {
-                dealFailedExercisePractice(user, exercise);
-                object.put("state", "400");
-                object.put("result", "很遗憾，答题失败，继续加油，早日找出bug\n\n" +testDetail);
-            }
-            return object.toJSONString();
-        }
-    }
-
-    @RequestMapping(value = "/getExercisePractice")
-    public String getExercisePracticeByUserIdAndExerciseId(@RequestParam("exerciseId") String exerciseId, HttpSession session) {
-        SysUser user = (SysUser) session.getAttribute("user");
-        ExercisePractice practice = exercisePracticeService.getByUserIdAndExerciseId(exerciseId, user.getUserId());
-        if(practice == null) {
-            return JSONObject.toJSONString("");
-        } else {
-            if(practice.getExerciseCode() == null) {
-                return JSONObject.toJSONString("");
-            } else {
-                return JSONObject.toJSONString(practice.getExerciseCode());
-            }
-        }
     }
 
     public void dealSuccessExercisePractice(SysUser user, SysExercise exercise) {
@@ -448,8 +362,8 @@ public class CompileController {
     }
 
     class InputOutputFile{
-       private ZipInputStream file;
-       private String fileName;
+        private ZipInputStream file;
+        private String fileName;
 
         public ZipInputStream getFile() {
             return file;
@@ -654,11 +568,9 @@ public class CompileController {
                             break;
                         }
                     }
-
                 }
                 return exercise.getExerciseScore()*(number/answer.length);
             }
         }
-
     }
 }
