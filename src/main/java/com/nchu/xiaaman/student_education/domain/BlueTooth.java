@@ -31,9 +31,6 @@ public class BlueTooth {
     @Column(name = "blue_time")
     private String blueTime;
 
-    @Column(name = "before_time")
-    private String beforeTime;          //上次与好友连接时间点,如果没有找到上次时间点，则设为本次时间
-
     public String getBlueToothId() {
         return blueToothId;
     }
@@ -90,11 +87,4 @@ public class BlueTooth {
         this.blueTime = blueTime;
     }
 
-    public String getBeforeTime() {
-        return beforeTime;
-    }
-
-    public void setBeforeTime(String beforeTime) {
-        this.beforeTime = beforeTime;
-    }
 }

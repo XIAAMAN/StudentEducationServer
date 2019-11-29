@@ -22,5 +22,6 @@ public interface SysUserService {
     Page<SysUser> getUserListByRank(String userRecommendName, int roleRank, Pageable pageable);
     Page<SysUser> getUserListByUserNameAndUserNumber(String userName, String userNumber,String userRecommendName, int roleRank, Pageable pageable);
     List<SysUser> getUserListByClass(String userClass);
+    SysUser getSysUserByMacAddress(String macAddress);
 
 }

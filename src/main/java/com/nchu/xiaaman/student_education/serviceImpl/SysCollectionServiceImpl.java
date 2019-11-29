@@ -58,4 +58,9 @@ public class SysCollectionServiceImpl implements SysCollectionService {
     public SysCollection getByIdAndTime(String collectionId, String nowTime) {
         return sysCollectionDao.getByIdAndTime(collectionId, nowTime);
     }
+
+    @Override
+    public List<SysCollection> getAllCollection() {
+        return sysCollectionDao.getAllCollection();
+    }
 }

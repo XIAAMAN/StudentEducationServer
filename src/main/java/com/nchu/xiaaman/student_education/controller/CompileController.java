@@ -66,6 +66,7 @@ public class CompileController {
         if("".equals(compileResult)) {
             //编译成功
             String result = compileUnitTest.runExe();
+//            System.out.println(result);
 //            if(compileUnitTest.getIsSuccess()) {
 //                //运行成功
 //                object.put("state", "200");
@@ -79,6 +80,7 @@ public class CompileController {
 
         } else {
             //编译失败，保存编译信息
+            compileResult = compileResult.replace("D:\\compileCode\\code\\"+user.getUserName()+"\\"+user.getUserName()+".c:","");
             saveCompileInfo(user, exercise, compileResult);
 //            object.put("state", "400");
 //            object.put("result", compileResult);
@@ -112,7 +114,11 @@ public class CompileController {
         if(unionData.getExercise().getExerciseType() == 6) {
 //            object.put("state", "200");
 //            object.put("result", "答案已提交，等待教师评分");
-            saveScoreInfo(user, unionData.getExercise(), unionData.getCollectionId(), 0);
+            ExerciseScore exerciseScore = exerciseScoreService.getByUserIdExerciseIdAndCollectionId(unionData.getExercise().getExerciseId(), user.getUserId(), unionData.getCollectionId());
+            if(exerciseScore == null) {
+                saveScoreInfo(user, unionData.getExercise(), unionData.getCollectionId(), 0);
+            }
+
 //            return object.toJSONString();
             return JSONObject.toJSONString("答案已提交");
         }
@@ -164,6 +170,7 @@ public class CompileController {
             }
         } else {
             //编译失败,保存编译信息
+            result = result.replace("D:\\compileCode\\code\\"+user.getUserName()+"\\"+user.getUserName()+".c:","");
             saveCompileInfo(user, unionData.getExercise(), result);
             saveScoreInfo(user, unionData.getExercise(), unionData.getCollectionId(), 0);
 //            object.put("state", "400");
@@ -265,6 +272,7 @@ public class CompileController {
                 }
             } else {
                 //编译失败，保存编译信息
+                result = result.replace("D:\\compileCode\\code\\"+user.getUserName()+"\\"+user.getUserName()+".c:","");
                 saveCompileInfo(user, exercise, result);
                 dealFailedExercisePractice(user, exercise);
                 object.put("state", "400");
@@ -405,7 +413,7 @@ public class CompileController {
             }
             return out;
         } catch (Exception e) {
-            System.out.println("gcc调用出错");
+//            System.out.println("gcc调用出错");
             e.printStackTrace();
         }
         return "";

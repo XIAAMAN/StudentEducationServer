@@ -7,20 +7,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29188fd6-dbd5-4172-ad89-5b8a5df3506e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/AppCollectionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/AppCompileController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/AppUploadFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/test2/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/AppBlueToothController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/BlueToothDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/BlueToothService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/BlueToothServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/config/WebAppConfigurer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/config/WebAppConfigurer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/AppLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/AppLoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/CompileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/CompileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysExerciseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysExerciseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/CollectionExerciseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/CollectionExerciseDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysCollection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/CollectionExerciseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/CollectionExerciseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/CollectionExerciseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/CollectionExerciseServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/CorrectExerciseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/CorrectExerciseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/FileUploadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/FileUploadController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysCollectionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/controller/SysCollectionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysCollectionDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysCollectionDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/dao/SysUserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/BlueTooth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/BlueTooth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/domain/SysUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysCollectionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysCollectionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/service/SysUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysCollectionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysCollectionServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/serviceImpl/SysUserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/utils/CompileUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nchu/xiaaman/student_education/utils/CompileUnit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test2/META-INF/MANIFEST.MF" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -307,6 +313,10 @@
       <workItem from="1571710420533" duration="14419000" />
       <workItem from="1571835613644" duration="44955000" />
       <workItem from="1572219143970" duration="12159000" />
+      <workItem from="1572311956477" duration="5547000" />
+      <workItem from="1572416101243" duration="5082000" />
+      <workItem from="1572469855357" duration="4516000" />
+      <workItem from="1574723007677" duration="27151000" />
     </task>
     <task id="LOCAL-00001" summary="初步完成导航栏自动加载">
       <created>1563543496559</created>
@@ -399,7 +409,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571594286725</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="完成app端答题的后台">
+      <created>1572312118679</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1572312118679</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -446,7 +463,8 @@
     <MESSAGE value="完成六中题型显示" />
     <MESSAGE value="完成教师和学生成绩查询" />
     <MESSAGE value="完成上传实验报告和成绩详情查询优化" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成上传实验报告和成绩详情查询优化" />
+    <MESSAGE value="完成app端答题的后台" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成app端答题的后台" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

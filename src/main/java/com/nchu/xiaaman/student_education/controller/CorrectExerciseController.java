@@ -76,9 +76,9 @@ public class CorrectExerciseController {
         SysExercise exercise;
         for(int i=0; i<exerciseIdList.size(); i++) {
             exercise = sysExerciseService.getById(exerciseIdList.get(i));
-            if(exercise.getExerciseType() == 6) {
-                exerciseList.add(exercise);
-            }
+//
+            exerciseList.add(exercise);
+
         }
         return new CorrectExerciseUnion().union(exerciseList, page, size);
     }
@@ -158,8 +158,27 @@ public class CorrectExerciseController {
         public String union(List<SysExercise> scoreDataList, int page, int size) {
             int length = scoreDataList.size();
             CorrectExerciseUnion correctExerciseUnion = new CorrectExerciseUnion();
-            correctExerciseUnion.setContent(scoreDataList);
             correctExerciseUnion.setTotalElements(length);
+            List<SysExercise> exerciseList = new ArrayList<>();
+            //当前数量少于一页数量
+            if(length <= size) {
+                correctExerciseUnion.setContent(scoreDataList);
+
+            } else {
+                if(length >= (page*size)) {      //未达到最后一页
+                    for(int i=(page-1)*size; i< page*size; i++) {
+                        exerciseList.add(scoreDataList.get(i));
+                    }
+                    correctExerciseUnion.setContent(exerciseList);
+                } else {
+                    for(int i=(page-1)*size; i< length; i++) {
+                        exerciseList.add(scoreDataList.get(i));
+                    }
+                    correctExerciseUnion.setContent(exerciseList);
+                }
+            }
+
+
             return correctExerciseUnion.toString();
         }
     }

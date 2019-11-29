@@ -48,16 +48,15 @@ public class LoginController {
         user.setUserPassword(md5Utils.md5(user.getUserPassword()));
 
         SysUser newUser = userService.getByNameAndPassword(user.getUserName(), user.getUserPassword());
-        if(newUser != null) {
-            //获取UserRole对象数组（一个用户可能拥有多个角色）
-//            SysUser testUser = (SysUser) session.getAttribute("user");
+        if(newUser != null ) {
+//            获取UserRole对象数组（一个用户可能拥有多个角色）
+            SysUser testUser = (SysUser) session.getAttribute("user");
 
-//            if(testUser != null) {
-//                System.out.println(testUser.getUserName());
-//                permisValue = JSONObject.toJSONString(permisValueList);
-//                permisMenu = new PermisMenu().decorateData(permisList, 600, permisValue,0);
-//                return permisMenu.toString();
-//            }
+            if(testUser != null && !newUser.getUserName().equals(testUser.getUserName())) {
+                permisValue = JSONObject.toJSONString(permisValueList);
+                permisMenu = new PermisMenu().decorateData(permisList, 600, permisValue,0);
+                return permisMenu.toString();
+            }
             session.setAttribute("user", newUser);
             int rankValue = userRoleService.getMaxRoleRank(newUser.getUserId());
             session.setAttribute("rankValue", rankValue);

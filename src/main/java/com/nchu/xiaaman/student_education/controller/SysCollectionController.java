@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.Entity;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -24,6 +26,9 @@ import java.util.List;
 public class SysCollectionController {
     @Autowired
     private ExerciseScoreService exerciseScoreService;
+
+    @Autowired
+    private SysCourseService sysCourseService;
 
     @Autowired
     private SysCollectionService sysCollectionService;
@@ -182,4 +187,59 @@ public class SysCollectionController {
         }
     }
 
+    @RequestMapping(value = "/getACollectionName")
+    public String getNameByCollectionId(@RequestParam("collectionId") String collectionId){
+        String collectionName = sysCollectionService.getById(collectionId).getCollectionName();
+        return JSONObject.toJSONString(collectionName);
+    }
+
+    @RequestMapping(value = "/getReport")
+    public String getAllReport(HttpSession session) {
+        List<String> collectionId, exerciseIdList;
+        SysExercise exercise;
+        List<SysExercise> exerciseTempList = new ArrayList<>();
+        List<SysExercise> exerciseList = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateTime = sdf.format(new Date());
+        List<SysCollection> collectionList = new ArrayList<>();
+        SysUser user = (SysUser) session.getAttribute("user");
+        int rankValue =(int) session.getAttribute("rankValue");
+        if(rankValue == 10) {
+            collectionList = sysCollectionService.getAllCollection();
+        }else {
+            List<SysCourse> courseList = sysCourseService.getCourseId('%' + user.getUserClass() + '%');
+            for(int i=0; i<courseList.size(); i++) {
+                collectionId = courseCollectionService.getCollectionIdListByCourseId(courseList.get(i).getCourseId());
+                for(int j=0; j<collectionId.size(); j++) {
+                    collectionList.add(sysCollectionService.getById(collectionId.get(j)));
+                }
+            }
+        }
+
+
+        //题目集已结束
+        for(int i=0; i<collectionList.size(); i++) {
+            if(collectionList.get(i).getCollectionEndTime().compareTo(dateTime)<0) {
+                exerciseIdList = collectionExerciseService.getExerciseIdListByCollectionId(collectionList.get(i).getCollectionId());
+                if(exerciseIdList != null && exerciseIdList.size()>0) {
+                    for(int j=0; j<exerciseIdList.size(); j++) {
+                        exercise = new SysExercise();
+                        BeanUtils.copyProperties(sysExerciseService.getById(exerciseIdList.get(j)), exercise);
+                        exercise.setExerciseWarning(collectionList.get(i).getCollectionId());
+                        exercise.setExerciseInputExample(collectionList.get(i).getCollectionName());
+                        exerciseTempList.add(exercise);
+                    }
+                }
+            }
+        }
+
+
+        for(int i=0; i<exerciseTempList.size(); i++) {
+            if(exerciseTempList.get(i).getExerciseType() == 6 && exerciseTempList.get(i).getExerciseName().contains("实验报告")
+                    && exerciseTempList.get(i).getExerciseDescription().length() < 20) {
+                exerciseList.add(exerciseTempList.get(i));
+            }
+        }
+        return exerciseList.toString();
+    }
 }

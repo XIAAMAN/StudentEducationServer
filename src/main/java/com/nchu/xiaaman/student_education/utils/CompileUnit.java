@@ -125,7 +125,7 @@ public class CompileUnit {
             worker.start();
 
             try {
-                worker.join(15000);     //设置15秒超时
+                worker.join(10000);     //设置10秒超时
                 if (worker.exit != null){
 //                    return worker.exit;
                 } else{

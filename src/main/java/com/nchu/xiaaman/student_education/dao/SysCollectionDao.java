@@ -11,10 +11,10 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 public interface SysCollectionDao extends JpaRepository<SysCollection, String> {
-    @Query(value = "select * from sys_collection", nativeQuery = true)
+    @Query(value = "select * from sys_collection order by collection_start_time desc", nativeQuery = true)
     Page<SysCollection> getCollection(Pageable pageable);
 
-    @Query(value = "select * from sys_collection where collection_id in (select collection_id from course_collection where course_id = ?1)", nativeQuery = true)
+    @Query(value = "select * from sys_collection where collection_id in (select collection_id from course_collection where course_id = ?1) order by collection_start_time desc", nativeQuery = true)
     Page<SysCollection> getCollectionByCourseId(String courseId, Pageable pageable);
 
     //通过id删除题目集
@@ -28,8 +28,12 @@ public interface SysCollectionDao extends JpaRepository<SysCollection, String> {
     SysCollection getByCollectionName(String collectionName);
 
     //查询所有题目集名称
-    @Query(value = "select collection_name from sys_collection", nativeQuery = true)
+    @Query(value = "select collection_name from sys_collection ", nativeQuery = true)
     List<String> getCollectionName();
+
+    //查询所有题目集
+    @Query(value = "select * from sys_collection ", nativeQuery = true)
+    List<SysCollection> getAllCollection();
 
     //根据id查询题目集名称
     @Query(value = "select collection_name from sys_collection where collection_id = ?1", nativeQuery = true)

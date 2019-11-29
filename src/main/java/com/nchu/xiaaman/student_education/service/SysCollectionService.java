@@ -16,4 +16,5 @@ public interface SysCollectionService {
     String getNameById(String collectionId);
     Page<SysCollection> getCollectionByCourseId(String courseId, Pageable pageable);
     SysCollection getByIdAndTime(String collectionId, String nowTime);
+    List<SysCollection> getAllCollection();
 }

@@ -40,6 +40,17 @@ public class SysUser {
     @Column(name = "user_status")       //用户状态，默认为1,0表示该用户不可见用户状态，默认为1,0表示该用户不可见
     private int userStatus;
 
+    @Column(name = "user_mac_address")
+    private String userMacAddress;
+
+    public String getUserMacAddress() {
+        return userMacAddress;
+    }
+
+    public void setUserMacAddress(String userMacAddress) {
+        this.userMacAddress = userMacAddress;
+    }
+
     public String getUserId() {
         return userId;
     }

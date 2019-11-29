@@ -82,5 +82,10 @@ public class SysUserServiceImpl implements SysUserService {
         return userDao.getUserListByClass(userClass);
     }
 
+    @Override
+    public SysUser getSysUserByMacAddress(String macAddress) {
+        return userDao.getSysUserByMacAddress(macAddress);
+    }
+
 
 }
