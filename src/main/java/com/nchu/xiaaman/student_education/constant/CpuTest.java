@@ -12,12 +12,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CpuTest {
 
     public static void main(String[] args) {
-        String result = "xia\ndd";
-        String resultt = "xia\ndd\r\n";
-        resultt = resultt.substring(0,resultt.length()-2);
+        String result = "7842479:9403:892";
 
 
-        System.out.println(result.equals(resultt));
+
+        System.out.println(result.toUpperCase());
 //        final AtomicInteger seq = new AtomicInteger(0);
 //
 //        ScheduledExecutorService es = Executors.newScheduledThreadPool(20, new ThreadFactory() {

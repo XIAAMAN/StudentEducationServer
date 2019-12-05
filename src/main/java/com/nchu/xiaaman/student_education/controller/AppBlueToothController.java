@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -28,16 +30,20 @@ public class AppBlueToothController {
     public void saveBlueInfo(@RequestBody List<BlueTooth> blueToothList, HttpServletRequest req, HttpServletResponse rep) throws UnsupportedEncodingException {
         req.setCharacterEncoding("UTF-8");
         rep.setContentType("text/html;charset=utf-8");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SysUser sysUser;
-        for(int i=0; i<blueToothList.size(); i++) {
-            //根据扫描到的mac地址，判断是否有该用户
-            sysUser = sysUserService.getSysUserByMacAddress(blueToothList.get(i).getFriendMacAddress());
-            if(sysUser != null) {
-                blueToothService.saveBlueToothList(blueToothList.get(i));
+        if(blueToothList != null && blueToothList.size()>0) {
+            for(int i=0; i<blueToothList.size(); i++) {
+                //根据扫描到的mac地址，判断是否有该用户
+                //将mac全部转为大写
+                sysUser = sysUserService.getSysUserByMacAddress(blueToothList.get(i).getFriendMacAddress().toUpperCase());
+                if(sysUser != null) {
+                    blueToothList.get(i).setBlueTime(sdf.format(new Date()));
+                    blueToothList.get(i).setFriendId(sysUser.getUserId());
+                    blueToothService.saveBlueToothList(blueToothList.get(i));
+                }
             }
         }
 
-
     }
-
 }

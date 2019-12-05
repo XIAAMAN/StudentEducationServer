@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -75,6 +77,19 @@ public class AppCollectionController {
                 collectionList.add(sysCollectionService.getByCollectionName(collectionNameList.get(i)));
             }
         }
+
+        //对题目集按照时间进行降序
+
+        Collections.sort(collectionList, new Comparator<SysCollection>() {
+            @Override
+            public int compare(SysCollection o1, SysCollection o2) {
+                if(o1.getCollectionStartTime().compareTo(o2.getCollectionStartTime())>0) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+        });
 
         message = JSONObject.toJSONString(collectionList);
         rep.getWriter().append(message).flush();
